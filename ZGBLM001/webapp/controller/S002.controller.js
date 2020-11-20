@@ -20,7 +20,7 @@ sap.ui.define([
 		 * @memberOf showcase.ZSHOWCASE004.view.Master
 		 */
 		onInit: function () {
-			this.oDataManager = new DataManager();
+			// this.oDataManager = new DataManager();
 
 			var oView = this.getView();
 			var oBusyDialog = sap.ui.xmlfragment(oView.getId(), "showcase.ZGBLM001.view.BusyDialog", this);
