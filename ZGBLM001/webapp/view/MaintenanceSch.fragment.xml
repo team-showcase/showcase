@@ -1,0 +1,74 @@
+<core:FragmentDefinition xmlns:core="sap.ui.core" xmlns:layout="sap.ui.layout" xmlns:form="sap.ui.layout.form" xmlns="sap.m">
+	<layout:VerticalLayout width="100%">
+		<layout:BlockLayout >
+			<layout:BlockLayoutRow>
+				<layout:BlockLayoutCell class="sapUiTinyMargin sapUiNoContentPadding">
+					<form:SimpleForm labelSpanL="12" labelSpanM="12" labelSpanS="12" emptySpanL="0" emptySpanM="0" emptySpanS="0" maxContainerCols="2"
+						layout="ResponsiveGridLayout" width="100%" class="sapUiTinyMargin">
+						<Title text="{i18n>ZZ_MAINSCH_SUBHEAD}" class="TextBold"/>
+						<Label text="{i18n>ZZ_LABEL_ISSUECONTENT}"/>
+						<Text text="{/MaintenanceOrder/issContent}"/>
+						<Label text="{i18n>ZZ_LABEL_DATETIMEFROM}"/>
+						<Text id="dateTimeFromText" text="{/MaintenanceOrder/dateFromDis}{i18n>ZZ_SAPCE}{/MaintenanceOrder/timeFromDis}"
+							visible="{/ScreenControl/displayModeVis}"/>
+						<DateTimePicker id="dateTimeFrom" dateValue="{/MaintenanceOrder/dateTimeFrom}" valueFormat="yyyy.MM.dd HH:mm:ss"
+							valueState="{/statusCtrl/dateTimeFrom}" change="onDateFromChange"
+							displayFormat="{ path : 'device>/isPhone', formatter : '.formatter.fmtDatePicker'}" width="80%" visible="{/ScreenControl/editModeVis}"/>
+						<Label text="{i18n>ZZ_LABEL_DATETIMETO}"/>
+						<Text id="dateTimeToText" text="{/MaintenanceOrder/dateToDis}{i18n>ZZ_SAPCE}{/MaintenanceOrder/timeToDis}"
+							visible="{/ScreenControl/displayModeVis}"/>
+						<DateTimePicker id="dateTimeTo" dateValue="{/MaintenanceOrder/dateTimeTo}" valueFormat="yyyy.MM.dd HH:mm:ss"
+							valueState="{/statusCtrl/dateTimeTo}" change="onDateToChange"
+							displayFormat="{ path : 'device>/isPhone', formatter : '.formatter.fmtDatePicker'}" width="80%" visible="{/ScreenControl/editModeVis}"/>
+						<Label text="{i18n>ZZ_LABEL_COUNTRY}"/>
+						<Text text="{/RepairedPersonInfo/countryName}"/>
+						<Label text="{i18n>ZZ_LABEL_STREET}"/>
+						<Text text="{/RepairedPersonInfo/streetNo}"/>
+						<Label text="{i18n>ZZ_LABEL_POSTALCODE}"/>
+						<Text text="{/RepairedPersonInfo/postalNo}"/>
+					</form:SimpleForm>
+				</layout:BlockLayoutCell>
+				<layout:BlockLayoutCell class="sapUiTinyMargin sapUiNoContentPadding">
+					<form:SimpleForm labelSpanL="12" labelSpanM="12" labelSpanS="12" emptySpanL="0" emptySpanM="0" emptySpanS="0" maxContainerCols="2"
+						layout="ResponsiveGridLayout" width="100%" class="sapUiTinyMargin">
+						<Title text="{i18n>ZZ_MAINSCH_SUBHEAD}" class="Invisble"/>
+						<Label text="{i18n>ZZ_LABEL_REPAIRNO}"/>
+						<Text text="{/RepairedPersonInfo/repPersonNo}" visible="{/ScreenControl/displayModeVis}"/>
+						<Input id="RepairInput" liveChange="onRepairChange" change="onRepairChange" valueState="{/statusCtrl/repairPerson}" type="Text"
+							placeholder="Enter Repair Person..." showSuggestion="true" showValueHelp="true" valueHelpRequest="RepairValueHelp"
+							suggestionItems="{HelpRepair>/RepairInfo}" width="80%" visible="{/ScreenControl/editModeVis}">
+							<suggestionItems>
+								<core:Item text="{HelpRepair>repPersonNo}"/>
+							</suggestionItems>
+						</Input>
+						<Label text="{i18n>ZZ_LABEL_REPAIRNAME}"/>
+						<Text text="{/RepairedPersonInfo/repPersonName1}{i18n>ZZ_SAPCE}{/RepairedPersonInfo/repPersonName2}"/>
+						<Label text="{i18n>ZZ_LABEL_TELPHONENO}"/>
+						<Text text="{/RepairedPersonInfo/telepNo}"/>
+						<Label text="{i18n>ZZ_LABEL_FAXNO}"/>
+						<Text text="{/RepairedPersonInfo/faxNo}"/>
+						<Label text="{i18n>ZZ_LABEL_EMAIL}"/>
+						<Text text="{/RepairedPersonInfo/emailAdd}"/>
+					</form:SimpleForm>
+				</layout:BlockLayoutCell>
+				<layout:BlockLayoutCell class="sapUiTinyMargin sapUiNoContentPadding">
+					<form:SimpleForm labelSpanL="12" labelSpanM="12" labelSpanS="12" emptySpanL="0" emptySpanM="0" emptySpanS="0" maxContainerCols="2"
+						layout="ResponsiveGridLayout" width="100%" class="sapUiTinyMargin">
+						<Title text="{i18n>ZZ_MAINSCH_SUBHEAD}" class="Invisble"/>
+						<Label text="{i18n>ZZ_LABEL_PRICE}"/>
+						<ObjectNumber number="{/MaintenanceOrder/price}" unit="{/MaintenanceOrder/currKey}" visible="{/ScreenControl/displayModeVis}"/>
+						<Input id="price" placeholder="Only Number Allowed" value="{/MaintenanceOrder/price}" width="80%" visible="{/ScreenControl/editModeVis}"
+							valueState="{/statusCtrl/price}" liveChange="onPriceChange"/>
+						<Label text="{i18n>ZZ_LABEL_CURRENCY}" visible="{/ScreenControl/editModeVis}"/>
+						<Input id="currency" value="{/MaintenanceOrder/currKey}" width="80%" visible="{/ScreenControl/editModeVis}"
+							valueState="{/statusCtrl/currency}" liveChange="onCurrencyChange"/>
+						<Label text="{i18n>ZZ_LABEL_REPAIRCONTENT}"/>
+						<Text text="{/MaintenanceOrder/repContent}" visible="{/ScreenControl/displayModeVis}" />
+						<TextArea id="content" value="{/MaintenanceOrder/repContent}" width="85%" visible="{/ScreenControl/editModeVis}"
+							valueState="{/statusCtrl/repairContent}" liveChange="onContentChange"/>
+					</form:SimpleForm>
+				</layout:BlockLayoutCell>
+			</layout:BlockLayoutRow>
+		</layout:BlockLayout>
+	</layout:VerticalLayout>
+</core:FragmentDefinition>

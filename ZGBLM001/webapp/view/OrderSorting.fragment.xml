@@ -1,0 +1,23 @@
+<core:FragmentDefinition xmlns="sap.m" xmlns:layout="sap.ui.layout" xmlns:form="sap.ui.layout.form" xmlns:core="sap.ui.core">
+	<Dialog id="OrderSorting" title="Sort Key" type="Standard" contentWidth="60%">
+		<layout:VerticalLayout class="sapUiContentPadding">
+			<layout:VerticalLayout class="sapUiNoContentPadding">
+				<Text text="{i18n>ZZ_SORT_KEY}" textAlign="Center" class="LargerLabel"/>
+				<RadioButton id="GroupA_No" groupName="GroupA" text="{i18n>ZZ_SORT_NO} " selected="true"/>
+				<RadioButton id="GroupA_Status" groupName="GroupA" text="{i18n>ZZ_SORT_STATUS}" />
+				<RadioButton id="GroupA_Date" groupName="GroupA" text="{i18n>ZZ_SORT_DATE}" />
+				<RadioButton id="GroupA_Person" groupName="GroupA" text="{i18n>ZZ_SORT_PRESON}" />
+				<RadioButton id="GroupA_Customer" groupName="GroupA" text="{i18n>ZZ_SORT_CUSTOMER}"/>
+				<Text text="{i18n>ZZ_SORT_METHOD}" textAlign="Center" class="LargerLabel"/>
+				<RadioButton id="GroupB_ASC" groupName="GroupB" text="{i18n>ZZ_SORT_ASC}" />
+				<RadioButton id="GroupB_DESC" groupName="GroupB" text="{i18n>ZZ_SORT_DESC}" selected="true"/>
+			</layout:VerticalLayout>
+		</layout:VerticalLayout>
+		<beginButton>
+			<Button text="{i18n>ZZ_SORT_OK}" press="onSortConfirm"/>
+		</beginButton>
+		<endButton>
+			<Button text="{i18n>ZZ_SORT_CANCEL}" press="onSortCancel"/>
+		</endButton>
+	</Dialog>
+</core:FragmentDefinition>

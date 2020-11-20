@@ -1,0 +1,90 @@
+{
+	"_version": "3.0.0",
+	"identification": {
+		"id": "796755e2-d802-4e22-b39c-e97649200668",
+		"entityType": "bundle"
+	},
+	"payload": {
+		"catalogs": [{
+			"_version": "3.0.0",
+			"identification": {
+				"id": "defaultCatalogId",
+				"title": "{{title}}",
+				"entityType": "catalog",
+				"i18n": "i18n/defaultCatalogId.properties"
+			},
+			"payload": {
+				"viz": []
+			}
+		}],
+		"groups": [{
+			"_version": "3.0.0",
+			"identification": {
+				"id": "defaultGroupId",
+				"title": "{{title}}",
+				"entityType": "group",
+				"i18n": "i18n/defaultGroupId.properties"
+			},
+			"payload": {
+				"viz": [{
+					"id": "sap.showcase.ZGBLD001-0-1605692426172",
+					"appId": "sap.showcase.ZGBLD001",
+					"vizId": "New-Create"
+				}, {
+					"id": "showcase.ZGBLD002-1-1605692426172",
+					"appId": "showcase.ZGBLD002",
+					"vizId": "Order-Display"
+				}, {
+					"id": "showcase.ZGBLL001-2-1605692426172",
+					"appId": "showcase.ZGBLL001",
+					"vizId": "List-Display"
+				}, {
+					"id": "showcase.ZGBLM001-4-1605692426172",
+					"appId": "showcase.ZGBLM001",
+					"vizId": "MasterDetail-Display"
+				}, {
+					"id": "overivew-5-1605769484209",
+					"appId": "overivew",
+					"vizId": "Overview-Display"
+				}, {
+					"id": "showcase.ZGBLL002-5-1605774426480",
+					"appId": "showcase.ZGBLL002",
+					"vizId": "ProductUpload-Upload"
+				}]
+			}
+		}],
+		"sites": [{
+			"_version": "3.0.0",
+			"identification": {
+				"id": "ce23b74d-36b1-4807-a8ed-e7f7a5611923",
+				"entityType": "site",
+				"title": "SAP Fiori launchpad site on Cloud Foundry",
+				"description": "SAP Fiori launchpad site on Cloud Foundry, deployed from WING"
+			},
+			"payload": {
+				"config": {
+					"ushellConfig": {
+						"renderers": {
+							"fiori2": {
+								"componentData": {
+									"config": {
+										"applications": {
+											"Shell-home": {}
+										}
+									}
+								}
+							}
+						}
+					}
+				},
+				"groupsOrder": ["defaultGroupId"],
+				"sap.cloud.portal": {
+					"config": {
+						"theme.id": "sap_fiori_3",
+						"theme.active": ["sap_fiori_3", "sap_fiori_3_dark", "sap_belize_hcb", "sap_belize_hcw"]
+					}
+				}
+			}
+		}]
+	}
+}

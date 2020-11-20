@@ -1,0 +1,219 @@
+<core:View xmlns:core="sap.ui.core" xmlns:uxap="sap.uxap" xmlns:layout="sap.ui.layout" xmlns="sap.m" xmlns:forms="sap.ui.layout.form"
+	xmlns:l="sap.ui.layout" controllerName="sap.showcase.ZGBLD001.controller.S002" height="100%">
+	<Page title="{i18n>ZZ_PAGETITLE}">
+		<uxap:ObjectPageLayout id="ObjectPageLayout" enableLazyLoading="false" upperCaseAnchorBar="false">
+			<uxap:sections>
+				<uxap:ObjectPageSection id="ProductHeader">
+					<uxap:subSections>
+						<uxap:ObjectPageSubSection title="{i18n>ZZ_SECTION_HEADER}" titleUppercase="false">
+							<uxap:blocks>
+								<l:VerticalLayout width="100%">
+									<l:BlockLayout>
+										<l:BlockLayoutRow>
+											<l:BlockLayoutCell class="sapUiTinyMargin sapUiNoContentPadding">
+												<forms:SimpleForm labelSpanL="12" labelSpanM="12" labelSpanS="12" emptySpanL="0" emptySpanM="0" emptySpanS="0" maxContainerCols="2"
+													layout="ResponsiveGridLayout" width="100%" class="sapUiTinyMargin">
+													<Label text="{i18n>ZZ_LABEL_MAINTORDER}"/>
+													<Text text=" "/>
+													<Label text="{i18n>ZZ_LABEL_STATUS}"/>
+													<Text text=""/>
+												</forms:SimpleForm>
+											</l:BlockLayoutCell>
+											<l:BlockLayoutCell class="sapUiTinyMargin sapUiNoContentPadding">
+												<forms:SimpleForm labelSpanL="12" labelSpanM="12" labelSpanS="12" emptySpanL="0" emptySpanM="0" emptySpanS="0" maxContainerCols="2"
+													layout="ResponsiveGridLayout" width="100%" class="sapUiTinyMargin">
+													<Label text="{i18n>ZZ_LABEL_PRODUCTNO}" required="true"/>
+													<Input id="productInput" liveChange="onProductChange" change="onProductChange" valueState="{/InputState/ProductNumberState}" type="Text" placeholder="Enter Product ..." showSuggestion="true" showValueHelp="true"
+														valueHelpRequest="handleValueHelp" suggestionItems="{HelpProduct>/ProductInfo}" width="75%">
+														<suggestionItems>
+															<core:Item text="{HelpProduct>productID}"/>
+														</suggestionItems>
+													</Input>
+													<Label text="{i18n>ZZ_LABEL_PRODUCTNAME}"/>
+													<Text text="{/ProductInformation/productName}"/>
+													<Label text="{i18n>ZZ_LABEL_CATEGORY}"/>
+													<Text text="{/ProductInformation/productCategory}"/>
+												</forms:SimpleForm>
+											</l:BlockLayoutCell>
+											<l:BlockLayoutCell class="sapUiTinyMargin sapUiNoContentPadding">
+												<forms:SimpleForm labelSpanL="12" labelSpanM="12" labelSpanS="12" emptySpanL="0" emptySpanM="0" emptySpanS="0" maxContainerCols="2"
+													layout="ResponsiveGridLayout" width="100%" class="sapUiTinyMargin">
+													<Label text="Rating"/>
+													<Text text=" "/>
+												</forms:SimpleForm>
+											</l:BlockLayoutCell>
+										</l:BlockLayoutRow>
+									</l:BlockLayout>
+								</l:VerticalLayout>
+							</uxap:blocks>
+						</uxap:ObjectPageSubSection>
+					</uxap:subSections>
+				</uxap:ObjectPageSection>
+				<uxap:ObjectPageSection id="xxxxxxx" titleUppercase="false">
+					<uxap:subSections>
+						<uxap:ObjectPageSubSection id="goalsSectionSS2" title="{i18n>ZZ_SECTION_PRODUCTINFO}">
+							<uxap:blocks>
+								<l:VerticalLayout width="100%">
+									<l:BlockLayout>
+										<l:BlockLayoutRow>
+											<l:BlockLayoutCell class="sapUiTinyMargin sapUiNoContentPadding">
+												<forms:SimpleForm labelSpanL="12" labelSpanM="12" labelSpanS="12" emptySpanL="0" emptySpanM="0" emptySpanS="0" maxContainerCols="2"
+													layout="ResponsiveGridLayout" width="100%" class="sapUiTinyMargin">
+													<Label text="{i18n>ZZ_SECTION_PRODUCTINFO}"/>
+													<Link text="{i18n>ZZ_LINK_HOMEPAGE}" target="_blank" href="{/ProductInformation/productInfo}"/>
+													<Text text=""/>
+													<Label text="{i18n>ZZ_LABEL_PARTSINFO}"/>
+													<Link text="{i18n>ZZ_LINK_XXXX}" target="_blank" href="{/ProductInformation/partsInfo}"/>
+													<Text text=""/>
+												</forms:SimpleForm>
+											</l:BlockLayoutCell>
+											<l:BlockLayoutCell class="sapUiTinyMargin sapUiNoContentPadding">
+												<forms:SimpleForm labelSpanL="12" labelSpanM="12" labelSpanS="12" emptySpanL="0" emptySpanM="0" emptySpanS="0" maxContainerCols="2"
+													layout="ResponsiveGridLayout" width="100%" class="sapUiTinyMargin">
+													<Label text="{i18n>ZZ_LABEL_TECHINFO}"/>
+													<Link text="{i18n>ZZ_LINK_OPERATION}" target="_blank" href="{/ProductInformation/technicalInfo}"/>
+													<Text text=""/>
+												</forms:SimpleForm>
+											</l:BlockLayoutCell>
+											<l:BlockLayoutCell class="sapUiTinyMargin sapUiNoContentPadding">
+												<forms:SimpleForm labelSpanL="12" labelSpanM="12" labelSpanS="12" emptySpanL="0" emptySpanM="0" emptySpanS="0" maxContainerCols="2"
+													layout="ResponsiveGridLayout" width="100%" class="sapUiTinyMargin">
+													<Label text="{i18n>ZZ_LABEL_ADDINFO}"/>
+													<Link text="{i18n>ZZ_LINK_PARTSGOODS}" target="_blank" href="{/ProductInformation/additionalInfo}"/>
+													<Text text=""/>
+												</forms:SimpleForm>
+											</l:BlockLayoutCell>
+										</l:BlockLayoutRow>
+									</l:BlockLayout>
+								</l:VerticalLayout>
+							</uxap:blocks>
+						</uxap:ObjectPageSubSection>
+					</uxap:subSections>
+				</uxap:ObjectPageSection>
+				<uxap:ObjectPageSection id="yyyyy" titleUppercase="false">
+					<uxap:subSections>
+						<uxap:ObjectPageSubSection id="goalsSectionSS3" title="{i18n>ZZ_SECTION_MAINTINFO}">
+							<uxap:blocks>
+								<l:VerticalLayout id="containerLayout" width="100%">
+									<l:BlockLayout id="BlockLayout">
+										<l:BlockLayoutRow>
+											<l:BlockLayoutCell width="3" class="sapUiTinyMargin sapUiNoContentPadding">
+												<forms:SimpleForm labelSpanL="12" labelSpanM="12" labelSpanS="12" emptySpanL="0" emptySpanM="0" emptySpanS="0" maxContainerCols="2"
+													layout="ResponsiveGridLayout" editable="true" width="100%" class="sapUiTinyMargin">
+													<Label text="{i18n>ZZ_LABEL_ISSUECONTENT}" required="true"/>
+													<TextArea id="issueTextArea" liveChange="onInputChange"  valueState="{/InputState/IssueContentState}" width="95%"/>
+												</forms:SimpleForm>
+											</l:BlockLayoutCell>
+										</l:BlockLayoutRow>
+										<l:BlockLayoutRow>
+											<l:BlockLayoutCell class="sapUiTinyMargin sapUiNoContentPadding">
+												<forms:SimpleForm labelSpanL="12" labelSpanM="12" labelSpanS="12" emptySpanL="0" emptySpanM="0" emptySpanS="0" maxContainerCols="2"
+													layout="ResponsiveGridLayout" width="100%" class="sapUiTinyMargin">
+													<Label text="{i18n>ZZ_LABEL_DATETIMEFROM}"/>
+													<Text text=""/>
+													<Label text="{i18n>ZZ_LABEL_DATETIMETO}"/>
+													<Text text=""/>
+													<Label text="{i18n>ZZ_LABEL_COUNTRY}"/>
+													<Text text=""/>
+													<Label text="{i18n>ZZ_LABEL_STREET}"/>
+													<Text text=""/>
+													<Label text="{i18n>ZZ_LABEL_POSTALCODE}"/>
+													<Text text=""/>
+												</forms:SimpleForm>
+											</l:BlockLayoutCell>
+											<l:BlockLayoutCell class="sapUiTinyMargin sapUiNoContentPadding">
+												<forms:SimpleForm labelSpanL="12" labelSpanM="12" labelSpanS="12" emptySpanL="0" emptySpanM="0" emptySpanS="0" maxContainerCols="2"
+													layout="ResponsiveGridLayout" width="100%" class="sapUiTinyMargin">
+													<Label text="{i18n>ZZ_LABEL_REPAIRNO}"/>
+													<Text text=""/>
+													<Label text="{i18n>ZZ_LABEL_REPAIRNAME}"/>
+													<Text text=""/>
+													<Label text="{i18n>ZZ_LABEL_TELPHONENO}"/>
+													<Text text=""/>
+													<Label text="{i18n>ZZ_LABEL_FAXNO}"/>
+													<Text text=""/>
+													<Label text="{i18n>ZZ_LABEL_EMAIL}"/>
+													<Text text=""/>
+												</forms:SimpleForm>
+											</l:BlockLayoutCell>
+											<l:BlockLayoutCell class="sapUiTinyMargin sapUiNoContentPadding">
+												<forms:SimpleForm labelSpanL="12" labelSpanM="12" labelSpanS="12" emptySpanL="0" emptySpanM="0" emptySpanS="0" maxContainerCols="2"
+													layout="ResponsiveGridLayout" width="100%" class="sapUiTinyMargin">
+													<Label text="{i18n>ZZ_LABEL_PRICE}"/>
+													<Text text=""/>
+													<Label text="{i18n>ZZ_LABEL_REPAIRCONTENT}"/>
+													<TextArea width="85%" editable="false"/>
+												</forms:SimpleForm>
+											</l:BlockLayoutCell>
+										</l:BlockLayoutRow>
+									</l:BlockLayout>
+								</l:VerticalLayout>
+							</uxap:blocks>
+						</uxap:ObjectPageSubSection>
+					</uxap:subSections>
+				</uxap:ObjectPageSection>
+				<uxap:ObjectPageSection id="zzzzzzzz" titleUppercase="false">
+					<uxap:subSections>
+						<uxap:ObjectPageSubSection id="goalsSectionSSx" title="{i18n>ZZ_SECTION_CUSTOMERINFO}">
+							<uxap:blocks>
+								<l:VerticalLayout width="100%">
+									<l:BlockLayout>
+										<l:BlockLayoutRow>
+											<l:BlockLayoutCell class="sapUiTinyMargin sapUiNoContentPadding">
+												<forms:SimpleForm labelSpanL="12" labelSpanM="12" labelSpanS="12" emptySpanL="0" emptySpanM="0" emptySpanS="0" maxContainerCols="2"
+													layout="ResponsiveGridLayout" width="100%" class="sapUiTinyMargin">
+													<Label text="{i18n>ZZ_LABEL_CUSTOMERID}" required="true"/>
+													<Input id="CustomerInput" liveChange="onCustomerChange"  change="onCustomerChange" valueState="{/InputState/CustomerIDState}" type="Text" placeholder="Enter customer ..." showSuggestion="true" showValueHelp="true"
+														valueHelpRequest="customerValueHelp" suggestionItems="{HelpCustomer>/CustomerInfo}" width="75%">
+														<suggestionItems>
+															<core:Item text="{HelpCustomer>customerNo}"/>
+														</suggestionItems>
+													</Input>
+													<Label text="{i18n>ZZ_LABEL_FIRSTNAME}"/>
+													<Text text="{/CustomerInformation/customerName2}"/>
+													<Label text="{i18n>ZZ_LABEL_LASTNAME}"/>
+													<Text text="{/CustomerInformation/customerName1}"/>
+													<Label text="{i18n>ZZ_LABEL_EMAIL}"/>
+													<Text text="{/CustomerInformation/emailAdd}"/>
+												</forms:SimpleForm>
+											</l:BlockLayoutCell>
+											<l:BlockLayoutCell class="sapUiTinyMargin sapUiNoContentPadding">
+												<forms:SimpleForm labelSpanL="12" labelSpanM="12" labelSpanS="12" emptySpanL="0" emptySpanM="0" emptySpanS="0" maxContainerCols="2"
+													layout="ResponsiveGridLayout" width="100%" class="sapUiTinyMargin">
+													<Label text="{i18n>ZZ_LABEL_STREET}"/>
+													<Text text="{/CustomerInformation/streetNo}"/>
+													<Label text="{i18n>ZZ_LABEL_CITY}"/>
+													<Text text="{/CustomerInformation/cityName}"/>
+													<Label text="{i18n>ZZ_LABEL_COUNTRY}"/>
+													<Text text="{/CustomerInformation/countryName}"/>
+												</forms:SimpleForm>
+											</l:BlockLayoutCell>
+											<l:BlockLayoutCell class="sapUiTinyMargin sapUiNoContentPadding">
+												<forms:SimpleForm labelSpanL="12" labelSpanM="12" labelSpanS="12" emptySpanL="0" emptySpanM="0" emptySpanS="0" maxContainerCols="2"
+													layout="ResponsiveGridLayout" width="100%" class="sapUiTinyMargin">
+													<Label text="{i18n>ZZ_LABEL_POSTALCODE}"/>
+													<Text text="{/CustomerInformation/postalNo}"/>
+													<Label text="{i18n>ZZ_LABEL_TELPHONENO}"/>
+													<Text text="{/CustomerInformation/telepNo}"/>
+													<Label text="{i18n>ZZ_LABEL_FAXNO}"/>
+													<Text text="{/CustomerInformation/faxNo}"/>
+												</forms:SimpleForm>
+											</l:BlockLayoutCell>
+										</l:BlockLayoutRow>
+									</l:BlockLayout>
+								</l:VerticalLayout>
+							</uxap:blocks>
+						</uxap:ObjectPageSubSection>
+					</uxap:subSections>
+				</uxap:ObjectPageSection>
+			</uxap:sections>
+		</uxap:ObjectPageLayout>
+		<footer>
+			<Toolbar>
+				<ToolbarSpacer/>
+				<Button text="{i18n>ZZ_BUTTON_SAVE}" type="Accept" press="onAcceptPress"/>
+				<Button text="{i18n>ZZ_BUTTON_CANCEL}" type="Reject" press="onCancelPress"/>
+			</Toolbar>
+		</footer>
+	</Page>
+</core:View>

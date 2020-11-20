@@ -1,0 +1,154 @@
+_schema-version: "3.2"
+ID: Showcase
+version: 0.0.1
+modules:
+- name: showcase-approuter
+  type: approuter.nodejs
+  path: showcase-approuter
+  requires:
+  - name: Showcase_html_repo_runtime
+  - name: uaa_Showcase
+  - name: dest_Showcase
+  - name: conn_Showcase
+  - name: portal_resources_Showcase
+  parameters:
+    disk-quota: 256M
+    memory: 256M
+- name: Showcase_ui_deployer
+  type: com.sap.application.content
+  path: .
+  requires:
+  - name: Showcase_html_repo_host
+    parameters:
+      content-target: true
+  build-parameters:
+    build-result: resources
+    requires:
+    - artifacts:
+      - ZGBLD002-content.zip
+      name: ZGBLD002
+      target-path: resources/
+    - artifacts:
+      - ZGBLL001-content.zip
+      name: ZGBLL001
+      target-path: resources/
+    - artifacts:
+      - ZGBLL002-content.zip
+      name: ZGBLL002
+      target-path: resources/
+    - artifacts:
+      - ZGBLM001-content.zip
+      name: ZGBLM001
+      target-path: resources/
+    - artifacts:
+      - ZGBLD001-content.zip
+      name: ZGBLD001
+      target-path: resources/
+    - artifacts:
+      - overivew.zip
+      name: overivew
+      target-path: resources/
+- name: ZGBLD002
+  type: html5
+  path: ZGBLD002
+  build-parameters:
+    builder: custom
+    commands:
+    - npm run build
+    supported-platforms: []
+- name: ZGBLL001
+  type: html5
+  path: ZGBLL001
+  build-parameters:
+    builder: custom
+    commands:
+    - npm run build
+    supported-platforms: []
+- name: ZGBLL002
+  type: html5
+  path: ZGBLL002
+  build-parameters:
+    builder: custom
+    commands:
+    - npm run build
+    supported-platforms: []
+- name: ZGBLM001
+  type: html5
+  path: ZGBLM001
+  build-parameters:
+    builder: custom
+    commands:
+    - npm run build
+    supported-platforms: []
+- name: ZGBLD001
+  type: html5
+  path: ZGBLD001
+  parameters:
+    buildpack: https://github.com/cloudfoundry/nodejs-buildpack/releases/download/v1.6.51/nodejs-buildpack-cflinuxfs3-v1.6.51.zip
+    memory: 128M
+    stack: cflinuxfs3
+  build-parameters:
+    builder: custom
+    commands:
+    - npm run build
+    supported-platforms: []
+- name: flp_showcase
+  type: com.sap.portal.content
+  path: flp_showcase
+  requires:
+  - name: portal_resources_Showcase
+  - name: Showcase_html_repo_host
+  - name: Showcase_ui_deployer
+  - name: uaa_Showcase
+  parameters:
+    buildpack: https://github.com/cloudfoundry/nodejs-buildpack/releases/download/v1.6.51/nodejs-buildpack-cflinuxfs3-v1.6.51.zip
+    memory: 128M
+    stack: cflinuxfs3
+- name: overivew
+  type: html5
+  path: overivew
+  build-parameters:
+    build-result: dist
+    builder: custom
+    commands:
+    - npm install
+    - npm run build:cf
+    supported-platforms: []
+resources:
+- name: Showcase_html_repo_runtime
+  type: org.cloudfoundry.managed-service
+  parameters:
+    service: html5-apps-repo
+    service-plan: app-runtime
+- name: Showcase_html_repo_host
+  type: org.cloudfoundry.managed-service
+  parameters:
+    service: html5-apps-repo
+    service-plan: app-host
+- name: uaa_Showcase
+  type: org.cloudfoundry.managed-service
+  parameters:
+    path: ./xs-security.json
+    service: xsuaa
+    service-name: Showcase-xsuaa-service
+    service-plan: application
+- name: conn_Showcase
+  type: org.cloudfoundry.managed-service
+  parameters:
+    service: connectivity
+    service-plan: lite
+- name: dest_Showcase
+  type: org.cloudfoundry.managed-service
+  parameters:
+    service: destination
+    service-plan: lite
+- name: portal_resources_Showcase
+  type: org.cloudfoundry.managed-service
+  parameters:
+    service: portal
+    service-plan: standard
+build-parameters:
+  before-all:
+  - builder: custom
+    commands:
+    - npm install

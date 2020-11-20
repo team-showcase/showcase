@@ -1,0 +1,56 @@
+<mvc:View xmlns:mvc="sap.ui.core.mvc" xmlns:core="sap.ui.core" xmlns:uxap="sap.uxap" xmlns:layout="sap.ui.layout"
+	xmlns:form="sap.ui.layout.form" xmlns="sap.m" controllerName="showcase.ZGBLM001.controller.S004"
+	xmlns:html="http://www.w3.org/1999/xhtml">
+	<App>
+		<pages>
+			<Page title="{i18n>ZZ_CREATE_TITLE}" showNavButton="{device>/isPhone}" navButtonPress="onNavBack">
+				<content>
+					<layout:VerticalLayout width="100%">
+						<layout:BlockLayout>
+							<layout:BlockLayoutRow>
+								<layout:BlockLayoutCell class="sapUiTinyMargin sapUiNoContentPadding">
+									<form:SimpleForm labelSpanL="12" labelSpanM="12" labelSpanS="12" emptySpanL="0" emptySpanM="0" emptySpanS="0" maxContainerCols="2"
+										layout="ResponsiveGridLayout" width="100%" class="sapUiTinyMargin" title="{i18n>ZZ_CREATE_SUBTITLE}">
+										<Label text="{i18n>ZZ_CREATE_PRODUCTNO}" required="true"/>
+										<Input id="productInput" liveChange="onProductChange" change="onProductChange" valueState="{/statusCtrl/productStauts}" type="Text"
+											placeholder="Enter Product ..." showSuggestion="true" showValueHelp="true" valueHelpRequest="handleValueHelp"
+											suggestionItems="{HelpProduct>/ProductInfo}" width="50%">
+											<suggestionItems>
+												<core:Item text="{HelpProduct>productID}"/>
+											</suggestionItems>
+										</Input>
+										<Label text="{i18n>ZZ_CREATE_PRODUCTNAME}" visible="{/visbleCtrl/productName}"/>
+										<Text text="{/createData/productName}" visible="{/visbleCtrl/productName}"/>
+										<Label text="{i18n>ZZ_CREATE_CATEGORY}" visible="{/visbleCtrl/category}"/>
+										<Text text="{/createData/productCategory}" visible="{/visbleCtrl/category}"/>
+										<Label text="{i18n>ZZ_CREATE_CUSTOMERID}" required="true"/>
+										<Input id="CustomerInput" liveChange="onCustomerChange" change="onCustomerChange" valueState="{/statusCtrl/customerStatus}" type="Text"
+											placeholder="Enter customer ..." showSuggestion="true" showValueHelp="true" valueHelpRequest="customerValueHelp"
+											suggestionItems="{HelpCustomer>/CustomerInfo}" width="50%">
+											<suggestionItems>
+												<core:Item text="{HelpCustomer>customerNo}"/>
+											</suggestionItems>
+										</Input>
+										<Label text="{i18n>ZZ_CREATE_NAME1}" visible="{/visbleCtrl/firstName}"/>
+										<Text text="{/createData/customerName1}" visible="{/visbleCtrl/firstName}"/>
+										<Label text="{i18n>ZZ_CREATE_NAME2}" visible="{/visbleCtrl/lastName}"/>
+										<Text text="{/createData/customerName2}" visible="{/visbleCtrl/lastName}"/>
+										<Label text="{i18n>ZZ_CREATE_ISSUE}" required="true"/>
+										<TextArea id="issueTextArea" liveChange="onIssueChange" valueState="{/statusCtrl/issueStatus}" width="75%"/>
+									</form:SimpleForm>
+								</layout:BlockLayoutCell>
+							</layout:BlockLayoutRow>
+						</layout:BlockLayout>
+					</layout:VerticalLayout>
+				</content>
+				<footer>
+					<Toolbar>
+						<ToolbarSpacer/>
+						<Button text="Save" type="Accept" press="onAcceptPress"/>
+						<Button text="Cancel" type="Reject" press="onCancelPress"/>
+					</Toolbar>
+				</footer>
+			</Page>
+		</pages>
+	</App>
+</mvc:View>

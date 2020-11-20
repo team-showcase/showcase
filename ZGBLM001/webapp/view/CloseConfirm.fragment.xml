@@ -1,0 +1,20 @@
+<core:FragmentDefinition xmlns="sap.m" xmlns:layout="sap.ui.layout" xmlns:form="sap.ui.layout.form" xmlns:core="sap.ui.core">
+	<Dialog id="CloseConfirm" title="{i18n>ZZ_CLOSE_TITLE}" type="Message">
+		<layout:VerticalLayout>
+			<Text text="{i18n>ZZ_CLOSE_MESSAGE}" class="sapUiSmallMargin"/>
+			<form:SimpleForm>
+				<FlexBox alignItems="Center" justifyContent="Center">
+					<items>
+						<RatingIndicator id="CloseFeedBack" maxValue="5" value="0" tooltip="Rating Tooltip" />
+					</items>
+				</FlexBox>
+			</form:SimpleForm>
+		</layout:VerticalLayout>
+		<beginButton>
+			<Button text="{i18n>ZZ_CLOSE_SUBMIT}" press="onCloseConfirm"/>
+		</beginButton>
+		<endButton>
+			<Button text="{i18n>ZZ_CLOSE_CANCEL}" press="onCloseCancel"/>
+		</endButton>
+	</Dialog>
+</core:FragmentDefinition>

@@ -1,0 +1,24 @@
+<core:FragmentDefinition xmlns="sap.m" xmlns:layout="sap.ui.layout" xmlns:form="sap.ui.layout.form" xmlns:core="sap.ui.core">
+	<Dialog id="ViewSetting" title="View Setting" type="Standard" contentWidth="40%">
+		<layout:VerticalLayout>
+			<CheckBox id="VSCheckAll" text="Select all({/viewsetting/selectCount}/8)" selected="{/viewsetting/selectAll}" select="onViewSetAll"/>
+			<CheckBox text="Order No." selected="{/viewsetting/orderNo}" select="onViewSetChange"/>
+			<CheckBox text="Status" selected="{/viewsetting/orderStatus}" select="onViewSetChange"/>
+			<CheckBox text="Product Number" selected="{/viewsetting/productNumber}" select="onViewSetChange"/>
+			<CheckBox text="Issue Date" selected="{/viewsetting/issueDate}" select="onViewSetChange"/>
+			<CheckBox text="Customer ID" selected="{/viewsetting/customerID}" select="onViewSetChange"/>
+			<CheckBox text="Repair Person ID" selected="{/viewsetting/repairPersonID}" select="onViewSetChange"/>
+			<!--<CheckBox text="Customer ID" selected="{/viewsetting/customerID}" select="onViewSetChange"/>-->
+			<CheckBox text="Issue" selected="{/viewsetting/issue}" select="onViewSetChange"/>
+			<CheckBox text="Repaired Content" selected="{/viewsetting/repairedContent}" select="onViewSetChange"/>
+			<!--<CheckBox text="Repair Person ID" selected="{/viewsetting/repairPersonID}" select="onViewSetChange"/>-->
+			<!--<CheckBox text="Customer ID" selected="{/viewsetting/customerID}" select="onViewSetChange" />-->
+		</layout:VerticalLayout>
+		<beginButton>
+			<Button text="OK" press="onViewSettingConfirm"/>
+		</beginButton>
+		<endButton>
+			<Button text="Cancel" press="onViewSettingCancel"/>
+		</endButton>
+	</Dialog>
+</core:FragmentDefinition>

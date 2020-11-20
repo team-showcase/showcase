@@ -1,0 +1,38 @@
+<core:FragmentDefinition xmlns:core="sap.ui.core" xmlns:layout="sap.ui.layout" xmlns:form="sap.ui.layout.form" xmlns="sap.m">
+	<Table items="{path: '/MaintenanceHistory'}">
+		<headerToolbar>
+			<Toolbar>
+				<Title text="{i18n>ZZ_MAINHIS_SUBHEAD}" class="TextBold" level="H2"/>
+			</Toolbar>
+		</headerToolbar>
+		<columns>
+			<Column>
+				<Text text="{i18n>ZZ_COLUMN_TICKETNO}"/>
+			</Column>
+			<Column visible="{device>/isNoPhone}">
+				<Text text="{i18n>ZZ_COLUMN_ITEMNO}"/>
+			</Column>
+			<Column>
+				<Text text="{i18n>ZZ_COLUMN_STATUS}"/>
+			</Column>
+			<Column visible="{device>/isNoPhone}">
+				<Text text="{i18n>ZZ_COLUMN_DATELAST}"/>
+			</Column>
+			<Column visible="{device>/isNoPhone}">
+				<Text text="{i18n>ZZ_COLUMN_LASTCHANGE}"/>
+			</Column>
+		</columns>
+		<items>
+			<ColumnListItem>
+				<cells>
+					<Label text="{orderNo}"/>
+					<Label text="{itemNo}"/>
+					<Label text="{status}"/>
+					<Label text="{path:'changeDate', formatter:'.formatter.fmtDate'}"/>
+					<Label
+						text="{path: 'changeBy', type: 'sap.ui.model.odata.type.Time', formatOptions: { pattern:'HH:mm:ss' }, constraints: { nullable: false }}"/>
+				</cells>
+			</ColumnListItem>
+		</items>
+	</Table>
+</core:FragmentDefinition>

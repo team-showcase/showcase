@@ -1,0 +1,42 @@
+<core:FragmentDefinition xmlns="sap.ui.comp.valuehelpdialog" xmlns:m="sap.m" xmlns:fb="sap.ui.comp.filterbar" xmlns:core="sap.ui.core">
+	<ValueHelpDialog id="orderFilter" title="{i18n>ZZ_VALUEHETITLE}" cancel="onOrderFilterCancel"
+		supportMultiselect="false" supportRanges="false" key="ProductId" descriptionKey="Name">
+		<filterBar>
+			<fb:FilterBar advancedMode="true" search="onFilterBarSearch" clear="onFilterBarClear" showClearOnFB="true">
+				<fb:filterGroupItems>
+					<fb:FilterGroupItem groupName="Group1" name="Status" label="{i18n>ZZ_STATUS}" visibleInFilterBar="true">
+						<fb:control>
+							<m:MultiComboBox id="statusSelect" selectionChange="handleStatusChange" selectionFinish="handleStatusFinish" items="{ path: '/statusHelp'}">
+								<core:Item key="{status}" text="{status}"/>
+							</m:MultiComboBox>
+						</fb:control>
+					</fb:FilterGroupItem>
+					<fb:FilterGroupItem groupName="Group1" name="Product Number" label="{i18n>ZZ_PRODUCTNO}" visibleInFilterBar="true">
+						<fb:control>
+							<m:MultiComboBox id="productNumberSelect" selectionChange="handleProductNumberChange" selectionFinish="handleProductNumberFinish"
+								items="{ path: '/productNumberHelp',sorter: { path: 'productID'}}">
+								<core:Item key="{productID}" text="{productID}"/>
+							</m:MultiComboBox>
+						</fb:control>
+					</fb:FilterGroupItem>
+					<fb:FilterGroupItem groupName="Group1" name="Customer ID" label="{i18n>ZZ_CUSTOMERID}" visibleInFilterBar="true">
+						<fb:control>
+							<m:MultiComboBox id="customerSelect" selectionChange="handleCustomerChange" selectionFinish="handleCustomerFinish"
+								items="{ path: '/customerNoHelp',sorter: { path: 'customerNo'}}">
+								<core:Item key="{customerNo}" text="{customerNo}"/>
+							</m:MultiComboBox>
+						</fb:control>
+					</fb:FilterGroupItem>
+					<fb:FilterGroupItem groupName="Group1" name="Repair Person ID" label="{i18n>ZZ_REPAIR_PERSON}" visibleInFilterBar="true">
+						<fb:control>
+							<m:MultiComboBox id="repairSelect" selectionChange="handleRepairChange" selectionFinish="handleRepairFinish"
+								items="{ path: '/repPersonNoHelp',sorter: { path: 'repPersonNo'}}">
+								<core:Item key="{repPersonNo}" text="{repPersonNo}"/>
+							</m:MultiComboBox>
+						</fb:control>
+					</fb:FilterGroupItem>
+				</fb:filterGroupItems>
+			</fb:FilterBar>
+		</filterBar>
+	</ValueHelpDialog>
+</core:FragmentDefinition>

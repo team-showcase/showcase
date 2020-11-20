@@ -1,0 +1,132 @@
+{
+	"_version": "1.8.0",
+	"sap.app": {
+		"id": "sap.showcase.ZGBLD001",
+		"type": "application",
+		"i18n": "i18n/i18n.properties",
+		"applicationVersion": {
+			"version": "1.0.0"
+		},
+		"title": "{{appTitle}}",
+        "description": "{{appDescription}}",
+        "tags": {
+			"keywords": []
+		},
+		"sourceTemplate": {
+			"id": "servicecatalog.connectivityComponentForManifest",
+			"version": "0.0.0"
+        },
+        "dataSources": {
+			"mainService": {
+				"uri": "sap/opu/odata/sap/ZGBLMTORDER_SRV/",
+				"type": "OData",
+				"settings": {
+					"localUri": "localService/ZGBLMTORDER_SRV/metadata.xml"
+				}
+            }
+        },
+        "crossNavigation": {
+            "inbounds": {
+                "intent1": {
+                    "signature": {
+                        "parameters": {},
+                        "additionalParameters": "allowed"
+                    },
+                    "semanticObject": "New",
+                    "action": "Create",
+                    "title": "{{appTitle}}",
+                    "info": "{{appTitle}}",
+                    "subTitle": "{{appSubTitle}}",
+                    "icon": "sap-icon://account"
+                }
+            }
+        }
+	},
+	"sap.ui": {
+		"technology": "UI5",
+		"icons": {
+			"icon": "",
+			"favIcon": "",
+			"phone": "",
+			"phone@2": "",
+			"tablet": "",
+			"tablet@2": ""
+		},
+		"deviceTypes": {
+			"desktop": true,
+			"tablet": true,
+			"phone": true
+		},
+		"supportedThemes": [
+			"sap_hcb",
+			"sap_belize"
+		]
+	},
+	"sap.ui5": {
+		"rootView": {
+			"viewName": "sap.showcase.ZGBLD001.view.S001",
+			"type": "XML"
+		},
+		"dependencies": {
+			"minUI5Version": "1.30.0",
+			"libs": {
+				"sap.ui.layout": {},
+				"sap.ui.core": {},
+				"sap.m": {}
+			}
+		},
+		"contentDensities": {
+			"compact": true,
+			"cozy": true
+		},
+		"models": {
+			"i18n": {
+				"type": "sap.ui.model.resource.ResourceModel",
+				"settings": {
+					"bundleName": "sap.showcase.ZGBLD001.i18n.i18n"
+				}
+			},
+			"ZGBLMTORDER_SRV": {
+				"dataSource": "mainService",
+				"preload": true,
+				"settings": {
+					"defaultBindingMode": "TwoWay",
+					"defaultCountMode": "Request",
+					"refreshAfterChange": false
+				}
+			}
+		},
+		"resources": {
+			"css": [
+				{
+					"uri": "css/style.css"
+				}
+			]
+		},
+		"routing": {
+			"config": {
+				"routerClass": "sap.m.routing.Router",
+				"viewType": "XML",
+				"async": true,
+				"viewPath": "sap.showcase.ZGBLD001.view",
+				"controlAggregation": "pages",
+				"controlId": "idAppControl",
+				"clearControlAggregation": false
+			},
+			"routes": [
+				{
+					"name": "ZZcreate",
+					"pattern": "",
+					"target": []
+				}
+			],
+			"targets": {
+				"ZZcreate": {
+					"viewType": "XML",
+					"viewName": "S002",
+					"viewLevel": 1
+				}
+			}
+		}
+    }
+}

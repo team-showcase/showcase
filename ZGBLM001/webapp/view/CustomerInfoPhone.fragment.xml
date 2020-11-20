@@ -1,0 +1,34 @@
+<core:FragmentDefinition xmlns:core="sap.ui.core" xmlns:layout="sap.ui.layout" xmlns:form="sap.ui.layout.form" xmlns="sap.m">
+	<layout:VerticalLayout width="100%">
+		<layout:BlockLayout>
+			<layout:BlockLayoutRow>
+				<layout:BlockLayoutCell class="sapUiTinyMargin sapUiNoContentPadding">
+					<form:SimpleForm labelSpanL="12" labelSpanM="12" labelSpanS="12" emptySpanL="0" emptySpanM="0" emptySpanS="0" maxContainerCols="2"
+						layout="ResponsiveGridLayout" width="100%" class="sapUiTinyMargin">
+						<Title text="{i18n>ZZ_CUSTOMER_SUBHEAD}" class="TextBold"/>
+						<Label text="{i18n>ZZ_LABEL_CUSTOMERID}"/>
+						<Text text="{/CustomerInformation/customerNo}"/>
+						<Label text="{i18n>ZZ_LABEL_FIRSTNAME}"/>
+						<Text text="{/CustomerInformation/customerName2}"/>
+						<Label text="{i18n>ZZ_LABEL_LASTNAME}"/>
+						<Text text="{/CustomerInformation/customerName1}"/>
+						<Label text="{i18n>ZZ_LABEL_EMAIL}"/>
+						<Text text="{/CustomerInformation/emailAdd}"/>
+						<Label text="{i18n>ZZ_LABEL_STREET}"/>
+						<Text text="{/CustomerInformation/streetNo}"/>
+						<Label text="{i18n>ZZ_LABEL_CITY}"/>
+						<Text text="{/CustomerInformation/cityName}"/>
+						<Label text="{i18n>ZZ_LABEL_COUNTRY}"/>
+						<Text text="{/CustomerInformation/countryName}"/>
+						<Label text="{i18n>ZZ_LABEL_POSTALCODE}"/>
+						<Text text="{/CustomerInformation/postalNo}"/>
+						<Label text="{i18n>ZZ_LABEL_TELPHONENO}"/>
+						<Text text="{/CustomerInformation/telepNo}"/>
+						<Label text="{i18n>ZZ_LABEL_FAXNO}"/>
+						<Text text="{/CustomerInformation/faxNo}"/>
+					</form:SimpleForm>
+				</layout:BlockLayoutCell>
+			</layout:BlockLayoutRow>
+		</layout:BlockLayout>
+	</layout:VerticalLayout>
+</core:FragmentDefinition>

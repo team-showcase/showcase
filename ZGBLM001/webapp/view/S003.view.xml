@@ -1,0 +1,89 @@
+<mvc:View controllerName="showcase.ZGBLM001.controller.S003" xmlns:mvc="sap.ui.core.mvc" xmlns="sap.m" xmlns:core="sap.ui.core"
+	xmlns:layout="sap.ui.layout" xmlns:form="sap.ui.layout.form" height="100%">
+	<Page title="{i18n>ZZ_DETAIL_TITLE}" enableScrolling="true" showNavButton="{device>/isPhone}" navButtonPress="onNavBack">
+		<ObjectHeader icon="{/ProductInformation/imageURL}" iconDensityAware="false" title="{/MaintenanceOrder/orderNo}"
+			number="{/MaintenanceOrder/price}" numberUnit="{/MaintenanceOrder/currKey}" visible="{device>/isPhone}">
+			<statuses>
+				<ObjectStatus text="{/MaintenanceOrder/statusNo}"/>
+				<ObjectStatus text="{path:'/MaintenanceOrder/issDate', formatter:'.formatter.fmtDate'}"/>
+			</statuses>
+			<attributes>
+				<ObjectAttribute text="{/ProductInformation/productName}"/>
+				<ObjectAttribute text="{/ProductInformation/productID}"/>
+				<ObjectAttribute text="FeedBack: {/MaintenanceOrder/feedBack}"/>
+			</attributes>
+		</ObjectHeader>
+		<content>
+			<VBox fitContainer="true">
+				<!--<HBox fitContainer="true" visible="{device>/isNoPhone}">-->
+					<layout:VerticalLayout width="100%" visible="{device>/isNoPhone}">
+						<layout:BlockLayout>
+							<layout:BlockLayoutRow>
+								<layout:BlockLayoutCell class="sapUiTinyMargin sapUiNoContentPadding">
+									<form:SimpleForm labelSpanL="12" labelSpanM="12" labelSpanS="12" emptySpanL="0" emptySpanM="0" emptySpanS="0" maxContainerCols="2"
+										layout="ResponsiveGridLayout" width="100%" class="sapUiTinyMargin">
+										<Text text="{/MaintenanceOrder/orderNo}" class="LargerLabel"/>
+										<Image src="{/ProductInformation/imageURL}" height="100px" width="100px"/>
+										<Text text="{/ProductInformation/productName}" class="sapUiSmallMarginTop"/>
+										<Text text="{/ProductInformation/productID}" class="sapUiSmallMarginTop"/>
+									</form:SimpleForm>
+								</layout:BlockLayoutCell>
+								<layout:BlockLayoutCell class="sapUiTinyMargin sapUiNoContentPadding">
+									<form:SimpleForm labelSpanL="12" labelSpanM="12" labelSpanS="12" emptySpanL="0" emptySpanM="0" emptySpanS="0" maxContainerCols="2"
+										layout="ResponsiveGridLayout" width="100%" class="sapUiTinyMargin">
+										<Label text="{i18n>ZZ_INVISIBLE}" class="Invisble"/>
+										<Text text="{i18n>ZZ_INVISIBLE}" class="Invisble"/>
+									</form:SimpleForm>
+								</layout:BlockLayoutCell>
+								<layout:BlockLayoutCell class="sapUiTinyMargin">
+									<form:SimpleForm labelSpanL="12" labelSpanM="12" labelSpanS="12" emptySpanL="0" emptySpanM="0" emptySpanS="0" maxContainerCols="2"
+										layout="ResponsiveGridLayout" width="100%" class="sapUiTinyMargin">
+										<Text text="{/MaintenanceOrder/statusNo}" class="RigthTetx LargerLabel"/>
+										<RatingIndicator maxValue="5" class="RatingPosition" value="{/MaintenanceOrder/feedBack}" tooltip="Rating Tooltip" editable="false"/>
+										<!--<Text text="{/MaintenanceOrder/issDate}" class="RigthTetx"/>-->
+										<Text text="{path:'/MaintenanceOrder/issDate', formatter:'.formatter.fmtDate'}" class="RigthTetx"/>
+										<Text text="{/MaintenanceOrder/price}{i18n>ZZ_SAPCE}{/MaintenanceOrder/currKey}" class="RigthTetx Size18Label"/>
+									</form:SimpleForm>
+								</layout:BlockLayoutCell>
+							</layout:BlockLayoutRow>
+						</layout:BlockLayout>
+					</layout:VerticalLayout>
+				<!--</HBox>-->
+				<IconTabBar id="IconTabBar" upperCase="true" expandable="true" stretchContentHeight="true" backgroundDesign="Transparent" applyContentPadding="false"
+					class="sapUiResponsiveContentPadding">
+					<items>
+						<IconTabFilter icon="sap-icon://hint">
+							<ScrollContainer height="100%" width="100%" horizontal="false" vertical="true" id="ProductFilter"></ScrollContainer>
+						</IconTabFilter>
+						<IconTabFilter icon="sap-icon://inventory" key="MiantSchFilterKey">
+							<ScrollContainer height="100%" width="100%" horizontal="false" vertical="true" id="MiantSchFilter"></ScrollContainer>
+						</IconTabFilter>
+						<IconTabFilter icon="sap-icon://notes">
+							<ScrollContainer height="100%" width="100%" horizontal="false" vertical="true" id="MiantHisFilter"></ScrollContainer>
+						</IconTabFilter>
+						<IconTabFilter icon="sap-icon://group">
+							<ScrollContainer height="100%" width="100%" horizontal="false" vertical="true" id="CustomerFilter"></ScrollContainer>
+						</IconTabFilter>
+					</items>
+					<content></content>
+					<layoutData>
+						<FlexItemData growFactor="1" baseSize="0%"/>
+					</layoutData>
+				</IconTabBar>
+			</VBox>
+		</content>
+		<footer>
+			<!--<Toolbar>-->
+			<Toolbar id="DetailToolbar" visible="{/ScreenControl/footerVis}">
+				<content>
+					<ToolbarSpacer/>
+					<Button text="{i18n>ZZ_DETAIL_REPAIR}" press="onPressRepair" visible="{/ScreenControl/repairVis}"/>
+					<Button text="{i18n>ZZ_DETAIL_CLOSE}" press="onPressClose" visible="{/ScreenControl/closeVis}"/>
+					<Button text="{i18n>ZZ_DETAIL_DELETE}" press="onPressDelete" visible="{/ScreenControl/deleteVis}"/>
+					<Button text="{i18n>ZZ_DETAIL_SAVE}" visible="{/ScreenControl/saveVis}" type="Accept" press="onAcceptPress"/>
+					<Button text="{i18n>ZZ_DETAIL_CANCEL}" visible="{/ScreenControl/cancelVis}" type="Reject" press="onCancelPress"/>
+				</content>
+			</Toolbar>
+		</footer>
+	</Page>
+</mvc:View>

@@ -1,0 +1,204 @@
+<mvc:View controllerName="showcase.ZGBLL002.controller.S002"
+	xmlns:core="sap.ui.core" xmlns:mvc="sap.ui.core.mvc" xmlns="sap.m"
+	xmlns:unified="sap.ui.unified" xmlns:fb="sap.ui.comp.smartfilterbar"
+	xmlns:table="sap.ui.table"
+	xmlns:customData="http://schemas.sap.com/sapui5/extension/sap.ui.core.CustomData/1"
+	xmlns:l="sap.ui.layout" xmlns:f="sap.ui.layout.form" height="100%">
+	<Page title="{i18n>appTitle}" class="sapUiContentPadding">
+
+		<!-- <fb:SmartFilterBar id="smartFilterBar" useToolbar="false" -->
+		<!-- search="onUpload" smartVariant="pageVariantId" persistencyKey="SmartFilterPKey" -->
+		<!-- entitySet="DeliverySet" customData:dateFormatSettings='\{"UTC":true\}'> -->
+		<!-- <fb:controlConfiguration> -->
+		<!-- <fb:ControlConfiguration key="MyOwnFilterField" -->
+		<!-- index="1" label="Custom Filter Field" groupId="_BASIC" -->
+		<!-- visibleInAdvancedArea="true"> -->
+		<!-- <fb:customControl> -->
+		<!-- <Select id="foo" customData:hasValue="true"> -->
+		<!-- <core:Item key="1" text="ONE" /> -->
+		<!-- <core:Item key="2" text="TWO" /> -->
+		<!-- <core:Item key="3" text="THREE" /> -->
+		<!-- </Select> -->
+		<!-- </fb:customControl> -->
+		<!-- </fb:ControlConfiguration> -->
+		<!-- <fb:ControlConfiguration key="MyOwnFilterField2" -->
+		<!-- index="2" label="File Address" groupId="_BASIC2" mandatory="mandatory" -->
+		<!-- visibleInAdvancedArea="true"> -->
+		<!-- <fb:customControl> -->
+		<!-- <unified:FileUploader id="fileup" -->
+		<!-- uploadUrl="proxy/sap/opu/odata/sap/ZFILEUPLOAD_SRV/UploadSet" -->
+		<!-- uploadStart="onStart" uploadComplete="onComplete" sendXHR="true" -->
+		<!-- useMultipart="false"> -->
+		<!-- <unified:headerParameters> -->
+		<!-- <unified:FileUploaderParameter -->
+		<!-- id="slug" -->
+		<!-- name="slug"> -->
+
+		<!-- </unified:FileUploaderParameter> -->
+		<!-- <unified:FileUploaderParameter -->
+		<!-- name="Accept" value="application/json"> -->
+
+		<!-- </unified:FileUploaderParameter> -->
+		<!-- </unified:headerParameters> -->
+		<!-- </unified:FileUploader> -->
+		<!-- </fb:customControl> -->
+		<!-- </fb:ControlConfiguration> -->
+		<!-- </fb:controlConfiguration> -->
+		<!-- </fb:SmartFilterBar> -->
+
+		<Panel width="auto" expandable="true" headerText="Upload Option"
+			expanded="true" expand="onExpand">
+			<l:VerticalLayout class="sapUiSmallMarginBegin"
+				width="90%">
+				<l:content>
+
+					<Label text="{i18n>ZFFILEADDRESS}" />
+					<unified:FileUploader id="FileUploader"
+						uploadStart="onStart" uploadComplete="onComplete" sendXHR="true"
+						useMultipart="false">
+						<unified:headerParameters>
+   							<unified:FileUploaderParameter id="slug"
+								name="slug">     
+							</unified:FileUploaderParameter>    
+
+							<unified:FileUploaderParameter
+								name="Accept" value="application/json">
+							</unified:FileUploaderParameter>
+
+							<unified:FileUploaderParameter id="csrfToken"
+								name="x-csrf-token">
+							</unified:FileUploaderParameter>
+
+						</unified:headerParameters>
+					</unified:FileUploader>
+				</l:content>
+			</l:VerticalLayout>
+			<Link class="sapUiSmallMarginBegin" text="Template Download" press="onDownload"/>
+		</Panel>
+
+		<IconTabBar id="idIconTabBar">
+			<items>
+				<IconTabFilter text="{i18n>ZFSUMMARY}" icon="sap-icon://newspaper">
+					<content>
+						<VBox>
+							<f:SimpleForm id="SimpleFormDisplay354" layout="ResponsiveGridLayout"
+								labelSpanL="2" labelSpanM="2" emptySpanL="0" emptySpanM="0"
+								columnsL="1" columnsM="1">
+								<f:content>
+
+									<Toolbar>
+										<Title text="{i18n>ZFSUMMARY}" />
+										<ToolbarSpacer />
+									</Toolbar>
+									<Label text="{i18n>ZFFILEADDRESS}" />
+									<Text text="{Summary>/fileName}" />
+									<Label text="{i18n>ZFDATE}" />
+									<Text
+										text="{
+										        path:'Summary>/uploadDate',
+												formatter:'.ZFormatDateUTCOutput'
+												 }" /> 
+									<Toolbar>
+										<Title text="{i18n>ZFRESULT}" />
+										<ToolbarSpacer />
+									</Toolbar>
+									<Label text="{i18n>ZFTOTAL}" />
+									<Text
+										text="{
+													path: 'Summary>/countAll',
+													formatter: '.ZFormatResultCounts'
+												}" />
+									<Label text="{i18n>ZFSUCCESS}" />
+									<Text
+										text="{
+													path: 'Summary>/countSucc',
+													formatter: '.ZFormatResultCounts'
+												}" />
+									<Label text="{i18n>ZFFAILED}" />
+									<Text
+										text="{
+													path: 'Summary>/countFail',
+													formatter: '.ZFormatResultCounts'
+												}" />
+								</f:content>
+							</f:SimpleForm>
+						</VBox>
+					</content>
+				</IconTabFilter>
+				<IconTabFilter icon="sap-icon://detail-view" text="{i18n>ZFMESSAGES}">
+					<content>
+						<table:Table rows="{Message>/}" selectionMode="None"
+							visibleRowCount="5" id="MessageTable">
+							<table:toolbar>
+								<Toolbar>
+									<Title id="title" text="{i18n>ZFMESSAGES}"></Title>
+									<ToolbarSpacer />
+									<Select id="messageTablefilter" customData:hasValue="false"
+										change="onFilterMessage">
+										<core:Item key="T" text="{i18n>ZFMSGALL}" />
+										<core:Item key="S" text="{i18n>ZFMSGSUCCESS}" />
+										<core:Item key="W" text="{i18n>ZFMSGWARNING}" />
+										<core:Item key="E" text="{i18n>ZFMSGERROR}" />
+									</Select>
+								</Toolbar>
+							</table:toolbar>
+
+							<table:columns>
+								<table:Column width="6rem">
+									<Label text="{i18n>ZFNO}" />
+									<table:template>
+										<Text text="{Message>NO}" />
+									</table:template>
+								</table:Column>
+								<table:Column width="6rem">
+									<Label text="{i18n>ZFINDEX}" />
+									<table:template>
+										<Text text="{Message>INDEX}" />
+									</table:template>
+								</table:Column>
+								<table:Column width="8rem" hAlign="Begin">
+									<Label text="{i18n>ZFSTATUS}" />
+									<table:template>
+
+										<ObjectStatus
+											text="{
+														path: 'Message>TYPE',
+														formatter: '.ZFormatMessageText'
+													}"
+											state="{
+														path: 'Message>TYPE',
+														formatter: '.ZFormatMessageStatus'
+													}"
+											icon="{
+														path: 'Message>TYPE',
+														formatter: '.ZFormatMessageIcon'
+													}" />
+									</table:template>
+								</table:Column>
+								<table:Column hAlign="Begin">
+									<Label text="{i18n>ZFMSGTXT}" />
+									<table:template>
+										<Label text="{Message>TEXT}" />
+									</table:template>
+								</table:Column>
+							</table:columns>
+						</table:Table>
+					</content>
+				</IconTabFilter>
+			</items>
+		</IconTabBar>
+
+		<footer>
+			<Toolbar>
+				<Button id="messagePopoverBtn" icon="sap-icon://message-popup" type="Emphasized"
+						text="{length>/messageLength}"
+						press="handleMessagePopoverPress"/>
+				<ToolbarSpacer />
+				<Button id= "Upload" text="Upload" press="onUpload" />
+			</Toolbar>
+		</footer>
+		<dependents>
+			<BusyDialog id="BusyDialog" />
+		</dependents>
+	</Page>
+</mvc:View>

@@ -1,0 +1,35 @@
+<core:FragmentDefinition xmlns:core="sap.ui.core"  xmlns:layout="sap.ui.layout" xmlns:form="sap.ui.layout.form" xmlns="sap.m">
+	<layout:VerticalLayout width="100%">
+		<layout:BlockLayout>
+			<layout:BlockLayoutRow>
+				<layout:BlockLayoutCell class="sapUiTinyMargin sapUiNoContentPadding">
+					<form:SimpleForm labelSpanL="12" labelSpanM="12" labelSpanS="12" emptySpanL="0" emptySpanM="0" emptySpanS="0" maxContainerCols="2"
+						layout="ResponsiveGridLayout" width="100%" class="sapUiTinyMargin">
+						<Title text="{i18n>ZZ_PRODUCT_SUBHEAD}" class="TextBold"/>
+						<Label text="{i18n>ZZ_LABEL_PRODUCTINFO}"/>
+						<!--<Text text="{/ProductInformation/productInfo}"/>-->
+						<Link text="{i18n>ZZ_LINK_HOMEPAGE}" target="_blank" href="{/ProductInformation/productInfo}"/>
+						<Label text="{i18n>ZZ_LABEL_PARTSINFO}"/>
+						<Link text="{i18n>ZZ_LINK_XXXX}" target="_blank" href="{/ProductInformation/partsInfo}"/>
+					</form:SimpleForm>
+				</layout:BlockLayoutCell>
+				<layout:BlockLayoutCell class="sapUiTinyMargin sapUiNoContentPadding">
+					<form:SimpleForm labelSpanL="12" labelSpanM="12" labelSpanS="12" emptySpanL="0" emptySpanM="0" emptySpanS="0" maxContainerCols="2"
+						layout="ResponsiveGridLayout" width="100%" class="sapUiTinyMargin">
+						<Title text="{i18n>ZZ_PRODUCT_SUBHEAD}" class="Invisble"/>
+						<Label text="{i18n>ZZ_LABEL_TECHINFO}"/>
+						<Link text="{i18n>ZZ_LINK_OPERATION}" target="_blank" href="{/ProductInformation/technicalInfo}"/>
+					</form:SimpleForm>
+				</layout:BlockLayoutCell>
+				<layout:BlockLayoutCell class="sapUiTinyMargin sapUiNoContentPadding">
+					<form:SimpleForm labelSpanL="12" labelSpanM="12" labelSpanS="12" emptySpanL="0" emptySpanM="0" emptySpanS="0" maxContainerCols="2"
+						layout="ResponsiveGridLayout" width="100%" class="sapUiTinyMargin">
+						<Title text="{i18n>ZZ_PRODUCT_SUBHEAD}" class="Invisble"/>
+						<Label text="{i18n>ZZ_LABEL_ADDINFO}"/>
+						<Link text="{i18n>ZZ_LINK_PARTSGOODS}" target="_blank" href="{/ProductInformation/additionalInfo}"/>
+					</form:SimpleForm>
+				</layout:BlockLayoutCell>
+			</layout:BlockLayoutRow>
+		</layout:BlockLayout>
+	</layout:VerticalLayout>
+</core:FragmentDefinition>

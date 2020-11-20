@@ -1,0 +1,18 @@
+<core:FragmentDefinition xmlns="sap.m" xmlns:layout="sap.ui.layout" xmlns:form="sap.ui.layout.form" xmlns:core="sap.ui.core">
+	<Dialog id="ViewSorting" title="Sort Key" type="Standard" contentWidth="40%">
+		<layout:VerticalLayout>
+			<CheckBox text="Order No." selected="{/viewsorting/orderNo}" select="onViewSetChange"/>
+			<CheckBox text="Status" selected="{/viewsorting/orderStatus}" select="onViewSetChange"/>
+			<CheckBox text="Issue Date" selected="{/viewsorting/issueDate}" select="onViewSetChange"/>
+			<CheckBox text="Customer ID" selected="{/viewsorting/customerID}" select="onViewSetChange"/>
+			<CheckBox text="Repair Person ID" selected="{/viewsorting/repairPersonID}" select="onViewSetChange"/>
+			<!--<CheckBox text="Customer ID" selected="{/viewsorting/customerID}" select="onViewSetChange" />-->
+		</layout:VerticalLayout>
+		<beginButton>
+			<Button text="OK" press="onViewSortingConfirm"/>
+		</beginButton>
+		<endButton>
+			<Button text="Cancel" press="onViewSortingCancel"/>
+		</endButton>
+	</Dialog>
+</core:FragmentDefinition>

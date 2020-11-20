@@ -1,0 +1,13 @@
+{
+	"ProductInfo": [{
+		"ProductNumber": "TEST001",
+		"LanguageKey": "EN",
+		"ProductName": "Computer Systems",
+		"Category": "CATE_TEST",
+		"ProductInformation": "www.google.com",
+		"TechnicalInformation": "www.google.com",
+		"AdditionalInformation": "www.google.com",
+		"ImageURL": "www.google.com",
+		"PartsInformation": "www.google.com"
+	}]
+}

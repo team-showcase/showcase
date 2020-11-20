@@ -1,0 +1,15 @@
+<core:FragmentDefinition
+	xmlns="sap.m"
+	xmlns:core="sap.ui.core">
+	<SelectDialog
+		title="Repair Person"
+		class="sapUiPopupWithPadding"
+		items="{HelpRepair>/RepairInfo}"
+		search="_repairValueHelpSearch"
+		confirm="_repairValueHelpClose"
+		cancel="_repairValueHelpClose">
+		<StandardListItem
+			title="{HelpRepair>repPersonNo}"
+			description="{HelpRepair>repPersonName1}{i18n>ZZ_SAPCE}{HelpRepair>repPersonName2}" />
+	</SelectDialog>
+</core:FragmentDefinition>

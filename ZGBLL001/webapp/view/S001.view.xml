@@ -1,0 +1,5 @@
+<mvc:View controllerName="showcase.ZGBLL001.controller.S001" xmlns:mvc="sap.ui.core.mvc" xmlns:html="http://www.w3.org/1999/xhtml"
+	displayBlock="true" xmlns="sap.m">
+	<App id="app">
+	</App>
+</mvc:View>

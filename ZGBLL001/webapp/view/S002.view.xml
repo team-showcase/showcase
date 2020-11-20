@@ -1,0 +1,135 @@
+<mvc:View height="100%" xmlns:mvc="sap.ui.core.mvc" xmlns:core="sap.ui.core" xmlns:layout="sap.ui.layout" xmlns="sap.m" xmlns:f="sap.f"
+	xmlns:fb="sap.ui.comp.filterbar" xmlns:vm="sap.ui.comp.variants" controllerName="showcase.ZGBLL001.controller.S002"
+	xmlns:html="http://www.w3.org/1999/xhtml">
+	<f:DynamicPage id="dynamicPageId" headerExpanded="true">
+		<!-- DynamicPage Title -->
+		<f:title>
+			<f:DynamicPageTitle>
+				<f:heading>
+					<vm:VariantManagement standardItemText="Standard"></vm:VariantManagement>
+				</f:heading>
+			</f:DynamicPageTitle>
+		</f:title>
+		<!-- DynamicPage Header -->
+		<f:header>
+			<f:DynamicPageHeader pinnable="false">
+				<f:content>
+					<fb:FilterBar reset="onReset" search="onOrderSearch" useToolbar="false" showGoOnFB="true">
+						<fb:filterGroupItems>
+							<fb:FilterGroupItem groupName="G1" name="Status" label="Status" visibleInFilterBar="true">
+								<fb:control>
+									<MultiComboBox id="statusSelect" selectionChange="handleStatusChange" selectionFinish="handleStatusFinish" items="{ path: '/statusHelp'}">
+										<core:Item key="{status}" text="{status}"/>
+									</MultiComboBox>
+								</fb:control>
+							</fb:FilterGroupItem>
+							<fb:FilterGroupItem groupName="G1" name="Product Number" label="Product Number" visibleInFilterBar="true">
+								<fb:control>
+									<MultiComboBox id="productNumberSelect" selectionChange="handleProductNumberChange" selectionFinish="handleProductNumberFinish"
+										items="{ path: 'HelpProductNumber>/productNumberHelp',sorter: { path: 'productID'}}">
+										<core:Item key="{HelpProductNumber>productID}" text="{HelpProductNumber>productID}"/>
+									</MultiComboBox>
+								</fb:control>
+							</fb:FilterGroupItem>
+							<fb:FilterGroupItem groupName="G1" name="Customer ID" label="Customer ID" visibleInFilterBar="true">
+								<fb:control>
+									<MultiComboBox id="customerSelect" selectionChange="handleCustomerChange" selectionFinish="handleCustomerFinish"
+										items="{ path: 'HelpCustomerNo>/customerNoHelp',sorter: { path: 'customerNo'}}">
+										<core:Item key="{HelpCustomerNo>customerNo}" text="{HelpCustomerNo>customerNo}"/>
+									</MultiComboBox>
+								</fb:control>
+							</fb:FilterGroupItem>
+							<fb:FilterGroupItem groupName="G1" name="Repair Person ID" label="Repair Person ID" visibleInFilterBar="true">
+								<fb:control>
+									<MultiComboBox id="repairSelect" selectionChange="handleRepairChange" selectionFinish="handleRepairFinish"
+										items="{ path: 'HelpRepPersonNo>/repPersonNoHelp',sorter: { path: 'repPersonNo'}}">
+										<core:Item key="{HelpRepPersonNo>repPersonNo}" text="{HelpRepPersonNo>repPersonNo}"/>
+									</MultiComboBox>
+								</fb:control>
+							</fb:FilterGroupItem>
+						</fb:filterGroupItems>
+					</fb:FilterBar>
+				</f:content>
+			</f:DynamicPageHeader>
+		</f:header>
+		<!-- DynamicPage Content -->
+		<f:content>
+			<IconTabBar id="iconTabBar" select="onQuickFilter" expandable="false" applyContentPadding="false" class="sapUiNoContentPadding">
+				<items>
+					<IconTabFilter key="orderAll" icon="sap-icon://activity-items" count="{/iconfilter/orderAll}" text="ALL" class="sapUiMediumMarginEnd"/>
+					<IconTabFilter key="orderNew" icon="sap-icon://home" iconColor="Negative" count="{/iconfilter/orderNew}" text="NEW"
+						class="sapUiMediumMarginEnd"/>
+					<IconTabFilter key="orderRepaired" icon="sap-icon://shipping-status" iconColor="Critical" count="{/iconfilter/orderRepaired}"
+						text="REPAIRED" class="sapUiMediumMarginEnd"/>
+					<IconTabFilter key="orderClosed" icon="sap-icon://complete" iconColor="Positive" count="{/iconfilter/orderClosed}" text="ClOSED"/>
+					<IconTabFilter key="orderDeleted" icon="sap-icon://delete" iconColor="Neutral" count="{/iconfilter/orderDeleted}" text="DELETED"/>
+				</items>
+				<content>
+					<!--<Table id="idProductsTable" inset="false" items="{ path: 'orderList>/orderList' ,sorter: {path: 'orderNo'} }">-->
+					<Table id="idProductsTable" inset="false" items="{ path: 'orderList>/orderList'}">
+						<headerToolbar>
+							<Toolbar>
+								<content>
+									<Title id="ordersCount" text="Orders({/iconfilter/orderTitleCount})" level="H2"/>
+									<ToolbarSpacer/>
+									<HBox>
+										<core:Icon press="onViewSettingPress" src="sap-icon://action-settings" class="sapUiSmallMarginBeginEnd"></core:Icon>
+										<core:Icon press="onViewSortingPress" src="sap-icon://sorting-ranking" class="sapUiSmallMarginEnd"></core:Icon>
+									</HBox>
+								</content>
+							</Toolbar>
+						</headerToolbar>
+						<columns>
+							<Column hAlign="Begin" visible="{/viewsetting/orderNo}">
+								<Text text="Order No."/>
+							</Column>
+							<Column hAlign="Begin" minScreenWidth="Tablet" visible="{/viewsetting/orderStatus}">
+								<Text text="Status"/>
+							</Column>
+							<Column hAlign="Begin" minScreenWidth="Desktop" visible="{/viewsetting/productNumber}">
+								<Text text="Product Number"/>
+							</Column>
+							<Column hAlign="Begin" visible="{/viewsetting/issueDate}">
+								<Text text="Issue Date"/>
+							</Column>
+							<Column hAlign="Begin" visible="{/viewsetting/customerID}">
+								<Text text="Customer ID"/>
+							</Column>
+							<Column hAlign="Begin" visible="{/viewsetting/repairPersonID}">
+								<Text text="Repair Person ID"/>
+							</Column>
+							<Column hAlign="Begin" visible="{/viewsetting/issue}">
+								<Text text="Issue"/>
+							</Column>
+							<Column hAlign="Begin" visible="{/viewsetting/repairedContent}">
+								<Text text="Repaired Content"/>
+							</Column>
+						</columns>
+						<items>
+							<ColumnListItem type="Navigation" press="onNaviToDetail">
+								<cells>
+									<Text text="{orderList>orderNo}" class="ZZTextLinkLike"/>
+									<Text text="{orderList>statusNo}"/>
+									<Text text="{orderList>productID}"/>
+									<Text text="{path:'orderList>issDate', formatter:'.formatter.fmtDate'}"/>
+									<Text text="{orderList>customerNo}"/>
+									<Text text="{orderList>repPersonNo}"/>
+									<Text text="{orderList>issContent}"/>
+									<Text text="{orderList>repContent}"/>
+								</cells>
+							</ColumnListItem>
+						</items>
+					</Table>
+				</content>
+			</IconTabBar>
+		</f:content>
+		<!-- DynamicPage Footer -->
+		<f:footer>
+			<OverflowToolbar>
+				<ToolbarSpacer/>
+				<Button type="Accept" text="Accept"/>
+				<Button type="Reject" text="Reject"/>
+			</OverflowToolbar>
+		</f:footer>
+	</f:DynamicPage>
+</mvc:View>

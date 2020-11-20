@@ -1,0 +1,40 @@
+<core:FragmentDefinition xmlns="sap.m" xmlns:layout="sap.ui.layout" xmlns:form="sap.ui.layout.form" xmlns:core="sap.ui.core">
+	<Dialog id="orderFilter" title="{i18n>ZZ_VALUEHETITLE}" type="Standard" contentWidth="90%">
+		<layout:VerticalLayout class="sapUiContentPadding">
+			<layout:VerticalLayout class="sapUiNoContentPadding">
+				<Label text="{i18n>ZZ_STATUS}"/>
+				<MultiComboBox id="statusSelect" selectionChange="handleStatusChange" selectionFinish="handleStatusFinish" items="{ path: '/statusHelp'}"
+					width="300px" maxWidth="300px">
+					<core:Item key="{status}" text="{status}"/>
+				</MultiComboBox>
+				<Label text="{i18n>ZZ_PRODUCTNO}"/>
+				<MultiComboBox id="productNumberSelect" selectionChange="handleProductNumberChange" selectionFinish="handleProductNumberFinish"
+					items="{ path: '/productNumberHelp',sorter: { path: 'productID'}}" width="300px" maxWidth="300px">
+					<core:Item key="{productID}" text="{productID}"/>
+				</MultiComboBox>
+				<Label text="{i18n>ZZ_CUSTOMERID}"/>
+				<MultiComboBox id="customerSelect" selectionChange="handleCustomerChange" selectionFinish="handleCustomerFinish"
+					items="{ path: '/customerNoHelp',sorter: { path: 'customerNo'}}" width="300px" maxWidth="300px">
+					<core:Item key="{customerNo}" text="{customerNo}"/>
+				</MultiComboBox>
+				<Label text="{i18n>ZZ_REPAIR_PERSON}"/>
+				<MultiComboBox id="repairSelect" selectionChange="handleRepairChange" selectionFinish="handleRepairFinish"
+					items="{ path: '/repPersonNoHelp',sorter: { path: 'repPersonNo'}}" width="300px" maxWidth="300px">
+					<core:Item key="{repPersonNo}" text="{repPersonNo}"/>
+				</MultiComboBox>
+			</layout:VerticalLayout>
+		</layout:VerticalLayout>
+		<!--<beginButton>-->
+		<!--	<Button text="{i18n>ZZ_FILTER_CLEAR}" press="onFilterBarClear"/>-->
+		<!--	<Button text="{i18n>ZZ_FILTER_OK}" press="onSortConfirm"/>-->
+		<!--</beginButton>-->
+		<!--<endButton>-->
+		<!--	<Button text="{i18n>ZZ_FILTER_CANCEL}" press="onSortCancel"/>-->
+		<!--</endButton>-->
+		<buttons>
+			<Button text="{i18n>ZZ_FILTER_CLEAR}" press="onFilterBarClear"/>
+			<Button text="{i18n>ZZ_FILTER_OK}" press="onFilterPhoneOK"/>
+			<Button text="{i18n>ZZ_FILTER_CANCEL}" press="onOrderFilterCancel"/>
+		</buttons>
+	</Dialog>
+</core:FragmentDefinition>

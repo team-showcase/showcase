@@ -1,0 +1,137 @@
+{
+  "_version": "1.1.0",
+  "sap.app": {
+    "id": "showcase.ZGBLL002",
+    "type": "application",
+    "i18n": "i18n/i18n.properties",
+    "applicationVersion": {
+      "version": "1.0.0"
+    },
+    "title": "{{appTitle}}",
+    "description": "{{appDescription}}",
+    "tags": {
+      "keywords": []
+    },
+    "sourceTemplate": {
+      "id": "servicecatalog.connectivityComponentForManifest",
+      "version": "0.0.0"
+    },
+    "dataSources": {
+      "ZGBLMTORDER_SRV": {
+        "uri": "sap/opu/odata/sap/ZGBLMTORDER_SRV/",
+        "type": "OData",
+        "settings": {
+          "localUri": "localService/metadata.xml"
+        }
+      }
+    },
+    "crossNavigation": {
+        "inbounds": {
+            "intent1": {
+                "signature": {
+                    "parameters": {},
+                    "additionalParameters": "allowed"
+                },
+                "semanticObject": "ProductUpload",
+                "action": "Upload",
+                "title": "{{appTitle}}",
+                "info": "{{appTitle}}",
+                "subTitle": "{{appSubTitle}}",
+                "icon": "sap-icon://account"
+            }
+        }
+    }
+  },
+  "sap.ui": {
+    "technology": "UI5",
+    "icons": {
+      "icon": "",
+      "favIcon": "",
+      "phone": "",
+      "phone@2": "",
+      "tablet": "",
+      "tablet@2": ""
+    },
+    "deviceTypes": {
+      "desktop": true,
+      "tablet": true,
+      "phone": true
+    }
+  },
+  "sap.ui5": {
+    "flexEnabled": false,
+    "rootView": {
+      "viewName": "showcase.ZGBLL002.view.S001",
+      "type": "XML",
+      "async": true,
+      "id": "S001"
+    },
+    "dependencies": {
+      "minUI5Version": "1.30.0",
+      "libs": {
+        "sap.ui.core": {},
+        "sap.m": {},
+        "sap.ui.layout": {}
+      }
+    },
+    "contentDensities": {
+      "compact": true,
+      "cozy": true
+    },
+    "models": {
+      "i18n": {
+        "type": "sap.ui.model.resource.ResourceModel",
+        "settings": {
+          "bundleName": "showcase.ZGBLL002.i18n.i18n"
+        }
+      },
+      "": {
+        "dataSource": "ZGBLMTORDER_SRV",
+        "preload": true,
+        "settings": {
+          "defaultBindingMode": "TwoWay",
+          "defaultCountMode": "Inline",
+          "refreshAfterChange": false
+        }
+      }
+    },
+    "resources": {
+      "css": [
+        {
+          "uri": "css/ZCSS001.css"
+        }
+      ]
+    },
+    "routing": {
+        "config": {
+            "routerClass": "sap.m.routing.Router",
+				"viewType": "XML",
+				"async": true,
+				"viewPath": "showcase.ZGBLL002.view",
+				"controlAggregation": "pages",
+				"controlId": "fioriContent",
+				"clearControlAggregation": false
+        },
+        "routes": [
+            {
+                "pattern": "",
+                "name": "ZZupload",
+                "target": ["ZZupload"],
+                "targetAggregation": "pages",
+				"targetControl": "fioriContent"
+            }
+        ],
+        "targets": {
+            "ZZupload": {
+                "viewType": "XML",
+                "viewName": "S002",
+                "viewLevel": 1
+            }
+        }   
+    }
+  },
+  "sap.platform.hcp": {
+    "uri": "webapp",
+    "_version": "1.1.0"
+  }
+}

@@ -1,0 +1,40 @@
+<mvc:View controllerName="showcase.ZGBLM001.controller.S002" xmlns:mvc="sap.ui.core.mvc" xmlns:core="sap.ui.core" xmlns="sap.m"
+	xmlns:semantic="sap.m.semantic" id="MasterView">
+	<semantic:MasterPage id="page" title="{parts:['i18n>ZZ_MASTERPAGE', '/orderCount'], 
+                    formatter: 'jQuery.sap.formatMessage'}">
+		<semantic:subHeader>
+			<Bar id="headerBar">
+				<contentLeft>
+					<SearchField id="searchField" width="92%" search="onSearch" liveChange="onSearch"></SearchField>
+				</contentLeft>
+				<contentRight>
+					<core:Icon press="onFilterPress"  src="sap-icon://filter" class="sapUiSmallMarginEnd"></core:Icon>
+					<core:Icon press="onSortPress"  src="sap-icon://sort" class="sapUiSmallMarginEnd"></core:Icon>
+				</contentRight>
+			</Bar>
+		</semantic:subHeader>
+		<semantic:content>
+			<!--<PullToRefresh id="pullToRefresh" visible="{device>/support/touch}" refresh="onRefresh"/>-->
+			<List items="{/orderList}" id="orderMasterlist">
+				<items>
+					<ObjectListItem title="{orderNo}" type="Active" press="onListItemPress" number="{price}" numberUnit="{currKey}">
+						<firstStatus>
+							<ObjectStatus text="{statusNo}" state="{path:'statusNo', formatter:'.formatter.fmtStatus'}"/>
+							<!--<ObjectStatus text="{statusNo}"/>-->
+						</firstStatus>
+						<secondStatus>
+							<ObjectStatus text="{path:'issDate', formatter:'.formatter.fmtDate'}"/>
+						</secondStatus>
+						<attributes>
+							<ObjectAttribute text="{ENTITY002/productName}"/>
+							<ObjectAttribute text="{productID}"/>
+						</attributes>
+					</ObjectListItem>
+				</items>
+			</List>
+		</semantic:content>
+		<semantic:addAction>
+			<semantic:AddAction id="addNewOrder" press="onAddNewOrder"/>
+		</semantic:addAction>
+	</semantic:MasterPage>
+</mvc:View>
