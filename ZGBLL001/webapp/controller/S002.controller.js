@@ -285,7 +285,7 @@ sap.ui.define([
             if (sRepairSelect) {
 					sFilter.push(new sap.ui.model.Filter(sRepairSelect));
 			}
-            
+            var sFilterFinal = new sap.ui.model.Filter(sFilter,true);
             // if (sStatusFilter) {
 			// 	sFilter.push(new sap.ui.model.Filter(sStatusFilter));
 			// } else {
@@ -385,7 +385,7 @@ sap.ui.define([
 			var oTableModelShadow = new sap.ui.model.json.JSONModel();
 			var aArrayShadow = [];
             // var oTableDataShadow = {};
-            var sFilterFinal = new sap.ui.model.Filter(sFilter,true);
+            
 			var pOrderList = this.getOwnerComponent().oDataManager.getOrderList(sFilterFinal, sOrderBy);
 			pOrderList.then(function (oDataRecieved) {
 				oTableData.orderList = oDataRecieved.results;
