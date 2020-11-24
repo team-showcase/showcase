@@ -27,29 +27,29 @@
 			},
 			"payload": {
 				"viz": [{
-					"id": "sap.showcase.ZGBLD001-0-1605692426172",
+					"id": "sap.showcase.ZGBLD001-0-1606183822058",
 					"appId": "sap.showcase.ZGBLD001",
 					"vizId": "New-Create"
 				}, {
-					"id": "showcase.ZGBLD002-1-1605692426172",
+					"id": "showcase.ZGBLD002-1-1606183822058",
 					"appId": "showcase.ZGBLD002",
 					"vizId": "Order-Display"
 				}, {
-					"id": "showcase.ZGBLL001-2-1605692426172",
+					"id": "showcase.ZGBLL001-2-1606183822058",
 					"appId": "showcase.ZGBLL001",
 					"vizId": "List-Display"
 				}, {
-					"id": "showcase.ZGBLM001-4-1605692426172",
+					"id": "showcase.ZGBLL002-3-1606183822058",
+					"appId": "showcase.ZGBLL002",
+					"vizId": "ProductUpload-Upload"
+				}, {
+					"id": "showcase.ZGBLM001-4-1606183822058",
 					"appId": "showcase.ZGBLM001",
 					"vizId": "MasterDetail-Display"
 				}, {
-					"id": "overivew-5-1605769484209",
+					"id": "overivew-5-1606183822058",
 					"appId": "overivew",
 					"vizId": "Overview-Display"
-				}, {
-					"id": "showcase.ZGBLL002-5-1605774426480",
-					"appId": "showcase.ZGBLL002",
-					"vizId": "ProductUpload-Upload"
 				}]
 			}
 		}],

@@ -264,7 +264,7 @@ sap.ui.define([
 				sMessage = sMessage + "\n" + this.oBundle.getText("ZZ_ISSUE_CHECK");
 			}
 			if (!oMaintOrderData.MaintenanceOrder.customerNo) {
-				sMessage = sMessage + "\n" + this.oBundle.getText("ZZ_PRODUCT_CHECK");
+				sMessage = sMessage + "\n" + this.oBundle.getText("ZZ_CUSTOMER_CHECK");
 			}
 			if (!oMaintOrderData.MaintenanceOrder.productID || !oMaintOrderData.MaintenanceOrder.issContent || !oMaintOrderData.MaintenanceOrder
 				.customerNo) {

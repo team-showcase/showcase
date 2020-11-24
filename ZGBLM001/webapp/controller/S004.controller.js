@@ -428,12 +428,19 @@ sap.ui.define([
 			oRouter.navTo("Master", false);
 		},
 
-		_PraseError: function (error) {
-			var oBody = error.response.body;
+		// _PraseError: function (error) {
+		// 	var oBody = error.response.body;
+		// 	oBody = JSON.parse(oBody);
+		// 	var sMessage = oBody.error.message.value;
+		// 	return sMessage;
+        // },
+        _PraseError: function (aError) {
+			var oBody = aError.responseText;
 			oBody = JSON.parse(oBody);
-			var sMessage = oBody.error.message.value;
+			var sMessage = oBody["error"]["message"]["value"];
 			return sMessage;
-		},
+        },
+        
 
 		_ShowMessageBox: function (sMessage) {
 				var bCompact = !!this.getView().$().closest(".sapUiSizeCompact").length;

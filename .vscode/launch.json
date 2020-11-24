@@ -1,5 +1,30 @@
 {
-  "configurations": [],
+  "configurations": [
+    {
+      "name": "overview",
+      "cwd": "${workspaceFolder}/ZGBLO001/overview",
+      "runtimeArgs": [
+        "run-script",
+        "start"
+      ],
+      "args": [
+        "--",
+        "--backendConfig",
+        "[{\"path\":\"/sap\",\"destination\":\"S4J\"}] "
+      ],
+      "type": "node",
+      "request": "launch",
+      "runtimeExecutable": "npm",
+      "windows": {
+        "runtimeExecutable": "npm.cmd"
+      },
+      "console": "integratedTerminal",
+      "internalConsoleOptions": "neverOpen",
+      "env": {
+        "run.config": "{\"handlerId\":\"fiori_tools\",\"runnableId\":\"/home/user/projects/Showcase/ZGBLO001/overview\"}"
+      }
+    }
+  ],
   "compounds": [],
   "inputs": [
     {
