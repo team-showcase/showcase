@@ -342,7 +342,7 @@ sap.ui.define([
 
 		_MasterRefresh: function () {
 			var oView = sap.ui.getCore().byId(this.MasterId);
-            var oModel = oView.getModel();
+            // var oModel = oView.getModel();
             this._refreshMasterList(oView);
 			// var oData = oModel.getData();
 			// var oDataModel = new sap.ui.model.odata.ODataModel("/sap/opu/odata/sap/ZSHOWCASE_SRV/", true);
@@ -378,14 +378,14 @@ sap.ui.define([
         },
 
         _setMasterList: function (aResults, oView) {
-            var oData = {};
+            var oModel = oView.getModel();
+            var oData = oModel.getData();
             var oModel= this.getView().getModel();
             if (aResults) {
 				oData.orderList = aResults;
 				oData.orderCount = aResults.length;
 			}
-            oModel.setData(oData);
-            this.getView().setModel(oModel);
+            oModel.refresh();
             var aSorters = [];
 			var oList = oView.byId("orderMasterlist");
 			var oBinding = oList.getBinding("items");

@@ -397,7 +397,8 @@ sap.ui.define([
 				this._showMessageBox(sMessage);
 			} else {
 				var oUpdateOrder = this._orderUpdateEdit.bind(this)();
-				var oError = this._orderUpdateExecute.bind(this, oUpdateOrder)();
+                // var oError = this._orderUpdateExecute.bind(this, oUpdateOrder)();
+                this._orderUpdateExecute(oUpdateOrder);
 			}
 		},
 
@@ -461,8 +462,8 @@ sap.ui.define([
             //update Data from Model
             var oPromise = this.getOwnerComponent().oDataManager.updateOrder(sOptions, oUpdateOrder)
             oPromise.then(function() {
-                that._onLoad(oUpdateOrder.orderNo, that);
-				that._MasterRefresh();
+                this._onLoad(oUpdateOrder.orderNo, that);
+				this._MasterRefresh();
                 this._busyDialog.close();
             }.bind(this)).catch(function(aError){
                 var sMessage = this._praseError(aError);
@@ -621,7 +622,7 @@ sap.ui.define([
 
 		_MasterRefresh: function () {
 			var oView = sap.ui.getCore().byId(this.MasterId);
-			var oModel = oView.getModel();
+			
 			// var oData = oModel.getData();
 			// var oDataModel = new sap.ui.model.odata.ODataModel("/sap/opu/odata/sap/ZSHOWCASE_SRV/", true);
             // var aOrderList = this.oDataManager.getMasterList();
@@ -650,14 +651,14 @@ sap.ui.define([
         },
 
         _setMasterList: function (aResults, oView) {
-            var oData = {};
-            var oModel= this.getView().getModel();
+           
+            var oModel = oView.getModel();
+            var oData = oModel.getData();
             if (aResults) {
 				oData.orderList = aResults;
 				oData.orderCount = aResults.length;
 			}
-            oModel.setData(oData);
-            this.getView().setModel(oModel);
+            oModel.refresh();
             var aSorters = [];
 			var oList = oView.byId("orderMasterlist");
 			var oBinding = oList.getBinding("items");

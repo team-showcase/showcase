@@ -44,7 +44,7 @@
                     "title": "{{appTitle}}",
                     "info": "{{appTitle}}",
                     "subTitle": "{{appSubTitle}}",
-                    "icon": "sap-icon://account"
+                    "icon": "sap-icon://Fiori3/Lumira001"
                 }
             }
         },
@@ -118,7 +118,7 @@
     },
     "sap.ovp": {
         "globalFilterModel": "mainService",
-        "globalFilterEntityType": "ENTITY001",
+        "globalFilterEntityType": "",
         "containerLayout": "resizable",
         "enableLiveFilter": true,
         "considerAnalyticalParameters": false,

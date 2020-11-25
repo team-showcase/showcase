@@ -31,8 +31,8 @@
 								<layout:BlockLayoutCell class="sapUiTinyMargin sapUiNoContentPadding">
 									<form:SimpleForm labelSpanL="12" labelSpanM="12" labelSpanS="12" emptySpanL="0" emptySpanM="0" emptySpanS="0" maxContainerCols="2"
 										layout="ResponsiveGridLayout" width="100%" class="sapUiTinyMargin">
-										<Label text="{i18n>ZZ_INVISIBLE}" class="Invisble" visible="false"/>
-										<Text text="{i18n>ZZ_INVISIBLE}" class="Invisble" visible="false"/>
+										<Label text="{i18n>ZZ_INVISIBLE}" class="Invisble"/>
+										<Text text="{i18n>ZZ_INVISIBLE}" class="Invisble"/>
 									</form:SimpleForm>
 								</layout:BlockLayoutCell>
 								<layout:BlockLayoutCell class="sapUiTinyMargin">

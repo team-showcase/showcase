@@ -1,1 +1,29 @@
 /* Enter your custom styles here */
+.sapFDynamicPageContentFitContainer{
+	padding : 0rem 0rem 0rem 0rem !important;
+}
+
+.sapFDynamicPageContent{
+	padding : 0rem 0rem 0rem 0rem !important;
+}
+
+.ZZTextCenter {
+text-align: center !important;
+}
+
+/*.sapMBtnIcon {*/
+/*    line-height: 1.375rem !important;*/
+/*}*/
+
+.ZZTextLinkLike {
+    /*text-decoration:underline !important;*/
+    color: #0070b1 !important;
+}
+
+.LargerLabel{
+     font-size:36px !important;
+    }
+
+/*.sapMTitle {*/
+/*    margin-top: 0.8rem !important;*/
+/*}*/
