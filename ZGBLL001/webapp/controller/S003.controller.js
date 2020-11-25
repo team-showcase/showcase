@@ -500,14 +500,14 @@ sap.ui.define([
 		// 	var sMessage = oBody.error.message.value;
 		// 	return sMessage;
         // },
-        _PraseError: function (aError) {
+        _praseError: function (aError) {
 			var oBody = aError.responseText;
 			oBody = JSON.parse(oBody);
 			var sMessage = oBody["error"]["message"]["value"];
 			return sMessage;
 		},
 
-		_ShowMessageBox: function (sMessage) {
+		_showMessageBox: function (sMessage) {
 				var bCompact = !!this.getView().$().closest(".sapUiSizeCompact").length;
 				MessageBox.error(
 					sMessage, {

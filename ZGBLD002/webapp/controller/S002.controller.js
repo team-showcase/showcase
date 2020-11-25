@@ -325,7 +325,7 @@ sap.ui.define([
 			MessageBox.warning(
 				"Input data will be lost. Are you sure to continue?", {
 					actions: ["Continue", sap.m.MessageBox.Action.CANCEL],
-					styleClass: bCompact ? "sapUiSizeCompact" : "",
+					styleClass: bCompact ? "sapUiSizecCompact" : "",
 					onClose: function (sAction) {
 						if (sAction === "Continue") {
 							oSelf.byId("dateTimeFrom").setValue("");
@@ -380,7 +380,7 @@ sap.ui.define([
 			oTempData.deleteFlag = oMaintOrderData.MaintenanceOrder.deleteFlag;
 			oTempData.action = "CLOSE";
 
-			oSelf.oDataManager._updateOrder(oSelf, oTempData);
+			this._updateOrder(oSelf, oTempData);
 		},
 
 		onCancelConfirm: function () {
@@ -428,7 +428,7 @@ sap.ui.define([
 			oTempData.deleteFlag = oMaintOrderData.MaintenanceOrder.deleteFlag;
 			oTempData.action = "DELETE";
 
-			oSelf.oDataManager.updateOrder(oSelf, oTempData);
+			this._updateOrder(oSelf, oTempData);
 		},
 
 		// _PraseError: function (error) {
@@ -437,14 +437,14 @@ sap.ui.define([
 		// 	var sMessage = oBody.error.message.value;
 		// 	return sMessage;
         // },
-        _PraseError: function (aError) {
+        _praseError: function (aError) {
 			var oBody = aError.responseText;
 			oBody = JSON.parse(oBody);
 			var sMessage = oBody["error"]["message"]["value"];
 			return sMessage;
 		},
 
-		_ShowMessageBox: function (sMessage) {
+		_showMessageBox: function (sMessage) {
 			var bCompact = !!this.getView().$().closest(".sapUiSizeCompact").length;
 			MessageBox.error(
 				sMessage, {

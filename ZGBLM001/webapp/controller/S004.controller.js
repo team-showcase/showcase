@@ -286,7 +286,7 @@ sap.ui.define([
 				sMessage = sMessage + this.oBundle.getText("ZZ_CREATE_ISSUEMES");
 			}
 			if (sMessage) {
-				this._ShowMessageBox(sMessage);
+				this._showMessageBox(sMessage);
 			} else {
 				var oTempData = {};
 				oTempData.orderNo = "";
@@ -434,7 +434,7 @@ sap.ui.define([
 		// 	var sMessage = oBody.error.message.value;
 		// 	return sMessage;
         // },
-        _PraseError: function (aError) {
+        _praseError: function (aError) {
 			var oBody = aError.responseText;
 			oBody = JSON.parse(oBody);
 			var sMessage = oBody["error"]["message"]["value"];
@@ -442,7 +442,7 @@ sap.ui.define([
         },
         
 
-		_ShowMessageBox: function (sMessage) {
+		_showMessageBox: function (sMessage) {
 				var bCompact = !!this.getView().$().closest(".sapUiSizeCompact").length;
 				MessageBox.error(
 					sMessage, {

@@ -413,8 +413,8 @@ sap.ui.define([
 			pOrderList.then(function (oDataRecieved) {
                 this._setDataRequest(oDataRecieved);
 			}.bind(this)).catch(function (err) {
-				var sMessage = this._PraseError(err);
-				this._ShowMessageBox(sMessage);
+				var sMessage = this._praseError(err);
+				this._showMessageBox(sMessage);
 			}.bind(this));
         },
         
@@ -582,14 +582,14 @@ sap.ui.define([
 		// 	var sMessage = oBody.error.message.value;
 		// 	return sMessage;
         // },
-        _PraseError: function (aError) {
+        _praseError: function (aError) {
 			var oBody = aError.responseText;
 			oBody = JSON.parse(oBody);
 			var sMessage = oBody["error"]["message"]["value"];
 			return sMessage;
 		},
 
-		_ShowMessageBox: function (sMessage) {
+		_showMessageBox: function (sMessage) {
 			var bCompact = !!this.getView().$().closest(".sapUiSizeCompact").length;
 			MessageBox.error(
 				sMessage, {

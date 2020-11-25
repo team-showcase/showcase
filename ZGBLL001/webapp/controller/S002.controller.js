@@ -412,8 +412,8 @@ sap.ui.define([
 					aShadow = aBlank;
 					oShadowMedel.setData(aShadow);
 				}
-				var sMessage = oSelf._PraseError(err);
-				oSelf._ShowMessageBox(sMessage);
+				var sMessage = oSelf._praseError(err);
+				oSelf._showMessageBox(sMessage);
 			}.bind(this));
 		},
 
@@ -550,7 +550,7 @@ sap.ui.define([
 		// 	var sMessage = oBody.error.message.value;
 		// 	return sMessage;
         // },
-        _PraseError: function (aError) {
+        _praseError: function (aError) {
 			var oBody = aError.responseText;
 			oBody = JSON.parse(oBody);
 			var sMessage = oBody["error"]["message"]["value"];
@@ -558,7 +558,7 @@ sap.ui.define([
         },
         
 
-		_ShowMessageBox: function (sMessage) {
+		_showMessageBox: function (sMessage) {
 			var bCompact = !!this.getView().$().closest(".sapUiSizeCompact").length;
 			MessageBox.error(
 				sMessage, {

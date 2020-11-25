@@ -47,8 +47,8 @@
 					"appId": "showcase.ZGBLM001",
 					"vizId": "MasterDetail-Display"
 				}, {
-					"id": "overivew-5-1606183822058",
-					"appId": "overivew",
+					"id": "showcase.ZGBLO001-5-1606277715203",
+					"appId": "showcase.ZGBLO001",
 					"vizId": "Overview-Display"
 				}]
 			}
@@ -70,7 +70,11 @@
 									"config": {
 										"applications": {
 											"Shell-home": {}
-										}
+										},
+										"enableSearch": true,
+										"enablePersonalization": true,
+										"enableSetTheme": true,
+										"enableSetLanguage": true
 									}
 								}
 							}

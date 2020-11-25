@@ -31,7 +31,7 @@
 				<layout:BlockLayoutCell class="sapUiTinyMargin sapUiNoContentPadding">
 					<form:SimpleForm labelSpanL="12" labelSpanM="12" labelSpanS="12" emptySpanL="0" emptySpanM="0" emptySpanS="0" maxContainerCols="2"
 						layout="ResponsiveGridLayout" width="100%" class="sapUiTinyMargin">
-						<Title text="{i18n>ZZ_MAINSCH_SUBHEAD}" class="Invisble"/>
+						<Title text="{i18n>ZZ_MAINSCH_SUBHEAD}" class="Invisble" visible="false"/>
 						<Label text="{i18n>ZZ_LABEL_REPAIRNO}"/>
 						<Text text="{/RepairedPersonInfo/repPersonNo}" visible="{/ScreenControl/displayModeVis}"/>
 						<Input id="RepairInput" liveChange="onRepairChange" change="onRepairChange" valueState="{/statusCtrl/repairPerson}" type="Text"
@@ -54,7 +54,7 @@
 				<layout:BlockLayoutCell class="sapUiTinyMargin sapUiNoContentPadding">
 					<form:SimpleForm labelSpanL="12" labelSpanM="12" labelSpanS="12" emptySpanL="0" emptySpanM="0" emptySpanS="0" maxContainerCols="2"
 						layout="ResponsiveGridLayout" width="100%" class="sapUiTinyMargin">
-						<Title text="{i18n>ZZ_MAINSCH_SUBHEAD}" class="Invisble"/>
+						<Title text="{i18n>ZZ_MAINSCH_SUBHEAD}" class="Invisble" visible="false"/>
 						<Label text="{i18n>ZZ_LABEL_PRICE}"/>
 						<ObjectNumber number="{/MaintenanceOrder/price}" unit="{/MaintenanceOrder/currKey}" visible="{/ScreenControl/displayModeVis}"/>
 						<Input id="price" placeholder="Only Number Allowed" value="{/MaintenanceOrder/price}" width="80%" visible="{/ScreenControl/editModeVis}"

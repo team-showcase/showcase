@@ -394,7 +394,7 @@ sap.ui.define([
 		onAcceptPress: function () {
 			var sMessage = this._editErrorMessage.bind(this)();
 			if (sMessage) {
-				this._ShowMessageBox(sMessage);
+				this._showMessageBox(sMessage);
 			} else {
 				var oUpdateOrder = this._orderUpdateEdit.bind(this)();
 				var oError = this._orderUpdateExecute.bind(this, oUpdateOrder)();
@@ -671,14 +671,14 @@ sap.ui.define([
 		// 	var sMessage = oBody.error.message.value;
 		// 	return sMessage;
         // },
-        _PraseError: function (aError) {
+        _praseError: function (aError) {
 			var oBody = aError.responseText;
 			oBody = JSON.parse(oBody);
 			var sMessage = oBody["error"]["message"]["value"];
 			return sMessage;
 		},
 
-		_ShowMessageBox: function (sMessage) {
+		_showMessageBox: function (sMessage) {
 			var bCompact = !!this.getView().$().closest(".sapUiSizeCompact").length;
 			MessageBox.error(
 				sMessage, {
