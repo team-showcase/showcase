@@ -1,0 +1,1 @@
+sap.ui.define(["sap/ovp/app/Component"],function(n){return n.extend("zgblo001.Component",{metadata:{manifest:"json"}})});
