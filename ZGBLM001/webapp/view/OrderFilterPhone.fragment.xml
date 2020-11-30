@@ -9,18 +9,18 @@
 				</MultiComboBox>
 				<Label text="{i18n>ZZ_PRODUCTNO}"/>
 				<MultiComboBox id="productNumberSelect" selectionChange="handleProductNumberChange" selectionFinish="handleProductNumberFinish"
-					items="{ path: '/productNumberHelp',sorter: { path: 'productID'}}" width="300px" maxWidth="300px">
-					<core:Item key="{productID}" text="{productID}"/>
+					items="{ path: 'HelpProductNumber>/productNumberHelp',sorter: { path: 'productID'}}" width="300px" maxWidth="300px">
+					<core:Item key="{HelpProductNumber>productID}" text="{HelpProductNumber>productID}"/>
 				</MultiComboBox>
 				<Label text="{i18n>ZZ_CUSTOMERID}"/>
 				<MultiComboBox id="customerSelect" selectionChange="handleCustomerChange" selectionFinish="handleCustomerFinish"
-					items="{ path: '/customerNoHelp',sorter: { path: 'customerNo'}}" width="300px" maxWidth="300px">
-					<core:Item key="{customerNo}" text="{customerNo}"/>
+					items="{ path: 'HelpCustomerNo>/customerNoHelp',sorter: { path: 'customerNo'}}" width="300px" maxWidth="300px">
+					<core:Item key="{HelpCustomerNo>customerNo}" text="{HelpCustomerNo>customerNo}"/>
 				</MultiComboBox>
 				<Label text="{i18n>ZZ_REPAIR_PERSON}"/>
 				<MultiComboBox id="repairSelect" selectionChange="handleRepairChange" selectionFinish="handleRepairFinish"
-					items="{ path: '/repPersonNoHelp',sorter: { path: 'repPersonNo'}}" width="300px" maxWidth="300px">
-					<core:Item key="{repPersonNo}" text="{repPersonNo}"/>
+					items="{ path: 'HelpRepair>/repPersonNoHelp',sorter: { path: 'repPersonNo'}}" width="300px" maxWidth="300px">
+					<core:Item key="{HelpRepair>repPersonNo}" text="{HelpRepair>repPersonNo}"/>
 				</MultiComboBox>
 			</layout:VerticalLayout>
 		</layout:VerticalLayout>

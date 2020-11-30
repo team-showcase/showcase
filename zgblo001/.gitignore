@@ -1,0 +1,7 @@
+node_modules/
+dist/
+.scp/
+# auto generated wildcard
+ZGBLD001/.env3
+# auto generated wildcard
+ZGBLD001/.env4

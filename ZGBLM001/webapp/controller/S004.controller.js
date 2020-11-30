@@ -20,25 +20,35 @@ sap.ui.define([
 		 * @memberOf showcase.ZSHOWCASE004.view.Create
 		 */
 		onInit: function () {
-			this.oDataManager = new DataManager();
+			// this.oDataManager = new DataManager();
 			//i18n
 			this.oBundle = this.getOwnerComponent().getModel("i18n").getResourceBundle();
-			//the product information
-			var aProductResult = this.oDataManager.getCreateProduct();
-			var oProductInfoModel = new sap.ui.model.json.JSONModel();
-			var oProductInfoData = {};
-			oProductInfoData.ProductInfo = aProductResult;
-			oProductInfoModel.setData(oProductInfoData);
-			this.getView().setModel(oProductInfoModel, "HelpProduct");
+			// //the product information
+			// var aProductResult = this.oDataManager.getCreateProduct();
+			// var oProductInfoModel = new sap.ui.model.json.JSONModel();
+			// var oProductInfoData = {};
+			// oProductInfoData.ProductInfo = aProductResult;
+			// oProductInfoModel.setData(oProductInfoData);
+			// this.getView().setModel(oProductInfoModel, "HelpProduct");
 
-			//the customer information
-			var aCustomerResult = this.oDataManager.getCreateCustomer();
-			var oCustomerInfoModel = new sap.ui.model.json.JSONModel();
-			var oCustomerInfoData = {};
-			oCustomerInfoData.CustomerInfo = aCustomerResult;
-			oCustomerInfoModel.setData(oCustomerInfoData);
-			this.getView().setModel(oCustomerInfoModel, "HelpCustomer");
+			// //the customer information
+			// var aCustomerResult = this.oDataManager.getCreateCustomer();
+			// var oCustomerInfoModel = new sap.ui.model.json.JSONModel();
+			// var oCustomerInfoData = {};
+			// oCustomerInfoData.CustomerInfo = aCustomerResult;
+			// oCustomerInfoModel.setData(oCustomerInfoData);
+			// this.getView().setModel(oCustomerInfoModel, "HelpCustomer");
 
+            // this._busyDialog = new sap.m.BusyDialog();
+            // this._busyDialog.open();
+            var oProductInfoModel = new sap.ui.model.json.JSONModel();
+            this.getView().setModel(oProductInfoModel, "HelpProduct");
+            this._getProductInfo();
+            
+            var oCustomerInfoModel = new sap.ui.model.json.JSONModel();
+            this.getView().setModel(oCustomerInfoModel, "HelpCustomer");
+            this._getCustomerInfo();
+            
 			var oRouter = sap.ui.core.UIComponent.getRouterFor(this);
 			oRouter.getRoute("Create").attachMatched(this._onRouteMatched, this);
 		},
@@ -82,7 +92,35 @@ sap.ui.define([
 			this.getView().byId("productInput").setValue("");
 			this.getView().byId("CustomerInput").setValue("");
 			this.getView().byId("issueTextArea").setValue("");
-		},
+        },
+        
+        _getProductInfo: function () {
+            //Set Data To Model
+            var oProductInfoModel = this.getView().getModel("HelpProduct");
+            var oPromise = this.getOwnerComponent().oDataManager.getCreateProduct()
+            oPromise.then(function(aResults) {
+                oProductInfoModel.setData({
+                    "ProductInfo" : aResults
+                });
+                this._busyDialog.close();
+            }.bind(this)).catch(function(aError){
+                this._busyDialog.close();
+            }.bind(this));
+        },
+                
+        _getCustomerInfo: function () {
+            //Set Data To Model
+            var oCustomerInfoModel = this.getView().getModel("HelpCustomer");
+            var oPromise = this.getOwnerComponent().oDataManager.getCreateCustomer()
+            oPromise.then(function(aResults) {
+                oCustomerInfoModel.setData({
+                    "CustomerInfo" : aResults
+                });
+                this._busyDialog.close();
+            }.bind(this)).catch(function(aError){
+                this._busyDialog.close();
+            }.bind(this));
+        },
 
 		handleValueHelp: function (oEvent) {
 			var sInputValue = oEvent.getSource().getValue();
@@ -228,8 +266,8 @@ sap.ui.define([
 		},
 
 		onAcceptPress: function () {
-			var that = this;
-			var oView = this.getView();
+			// var that = this;
+			// var oView = this.getView();
 			var sMessage = "";
 			var sProduct = this.getView().byId("productInput").getValue();
 			var sCustomer = this.getView().byId("CustomerInput").getValue();
@@ -248,59 +286,112 @@ sap.ui.define([
 				sMessage = sMessage + this.oBundle.getText("ZZ_CREATE_ISSUEMES");
 			}
 			if (sMessage) {
-				this._ShowMessageBox(sMessage);
+				this._showMessageBox(sMessage);
 			} else {
 				var oTempData = {};
 				oTempData.orderNo = "";
 				oTempData.productID = sProduct;
 				oTempData.customerNo = sCustomer;
 				oTempData.issContent = sIssue;
-				oTempData.action = "NEW";
-
-				var pCreateOrder = this.oDataManager.createOrder(oTempData);
-				pCreateOrder.then(function (oDataRecieved) {
-					oView.byId("productInput").setValue("");
-					oView.byId("CustomerInput").setValue("");
-					oView.byId("issueTextArea").setValue("");
-					var oRouter = sap.ui.core.UIComponent.getRouterFor(that);
-					var sOrderNo = "orderdummy";
-					that._MasterRefresh();
-					oRouter.navTo("Detail", {
-						masterId: that.MasterId,
-						orderNo: sOrderNo
-					});
-				}).catch(function (err) {
-					var sMessage = that._PraseError(err);
-					that._ShowMessageBox(sMessage);
-				});
+                oTempData.action = "NEW";
+                
+                this._createOrder(oTempData);
+				// var pCreateOrder = this.oDataManager.createOrder(oTempData);
+				// pCreateOrder.then(function (oDataRecieved) {
+				// 	oView.byId("productInput").setValue("");
+				// 	oView.byId("CustomerInput").setValue("");
+				// 	oView.byId("issueTextArea").setValue("");
+				// 	var oRouter = sap.ui.core.UIComponent.getRouterFor(that);
+				// 	var sOrderNo = "orderdummy";
+				// 	that._MasterRefresh();
+				// 	oRouter.navTo("Detail", {
+				// 		masterId: that.MasterId,
+				// 		orderNo: sOrderNo
+				// 	});
+				// }).catch(function (err) {
+				// 	var sMessage = that._PraseError(err);
+				// 	that._ShowMessageBox(sMessage);
+				// });
 
 			}
-		},
+        },
+        
+        _createOrder: function (oTempData) {
+            //update Data from Model
+            var that = this;
+            var oView = this.getView();
+            var oPromise = this.getOwnerComponent().oDataManager.createOrder(oTempData)
+            oPromise.then(function() {
+                oView.byId("productInput").setValue("");
+                oView.byId("CustomerInput").setValue("");
+                oView.byId("issueTextArea").setValue("");
+                var oRouter = sap.ui.core.UIComponent.getRouterFor(that);
+                var sOrderNo = "orderdummy";
+                that._MasterRefresh();
+                oRouter.navTo("Detail", {
+                    masterId: that.MasterId,
+                    orderNo: sOrderNo
+                });
+                this._busyDialog.close();
+            }.bind(this)).catch(function(aError){
+                var sMessage = that._praseError(aError);
+                that._showMessageBox(sMessage);
+                this._busyDialog.close();
+            }.bind(this));
+        },
 
 		_MasterRefresh: function () {
 			var oView = sap.ui.getCore().byId(this.MasterId);
-			var oModel = oView.getModel();
-			var oData = oModel.getData();
-			var oDataModel = new sap.ui.model.odata.ODataModel("/sap/opu/odata/sap/ZSHOWCASE_SRV/", true);
-			var sFilterSt = "ENTITY001Set?$expand=ENTITY002";
-			oDataModel.read(sFilterSt, {
-				context: null,
-				urlParameters: null,
-				async: false,
-				success: function (oDataRecieved, responce) {
-					oData.orderList = oDataRecieved.results;
-					oData.orderCount = oDataRecieved.results.length;
-					oModel.refresh();
-				},
-				error: function (err) {}
-			});
+            // var oModel = oView.getModel();
+            this._refreshMasterList(oView);
+			// var oData = oModel.getData();
+			// var oDataModel = new sap.ui.model.odata.ODataModel("/sap/opu/odata/sap/ZSHOWCASE_SRV/", true);
+			// var sFilterSt = "ENTITY001Set?$expand=ENTITY002";
+			// oDataModel.read(sFilterSt, {
+			// 	context: null,
+			// 	urlParameters: null,
+			// 	async: false,
+			// 	success: function (oDataRecieved, responce) {
+			// 		oData.orderList = oDataRecieved.results;
+			// 		oData.orderCount = oDataRecieved.results.length;
+			// 		oModel.refresh();
+			// 	},
+			// 	error: function (err) {}
+			// });
 
-			var aSorters = [];
+			// var aSorters = [];
+			// var oList = oView.byId("orderMasterlist");
+			// var oBinding = oList.getBinding("items");
+			// aSorters.push(new sap.ui.model.Sorter("orderNo", true));
+			// oBinding.sort(aSorters);
+        },
+        
+        _refreshMasterList: function (oView) {
+            //Set Data To Model
+            var oPromise = this.getOwnerComponent().oDataManager.getMasterList()
+            oPromise.then(function(aResults) {
+                this._setMasterList(aResults, oView);
+                this._busyDialog.close();
+            }.bind(this)).catch(function(aError){
+                this._busyDialog.close();
+            }.bind(this));
+        },
+
+        _setMasterList: function (aResults, oView) {
+            var oModel = oView.getModel();
+            var oData = oModel.getData();
+            var oModel= this.getView().getModel();
+            if (aResults) {
+				oData.orderList = aResults;
+				oData.orderCount = aResults.length;
+			}
+            oModel.refresh();
+            var aSorters = [];
 			var oList = oView.byId("orderMasterlist");
 			var oBinding = oList.getBinding("items");
 			aSorters.push(new sap.ui.model.Sorter("orderNo", true));
-			oBinding.sort(aSorters);
-		},
+            oBinding.sort(aSorters);
+        },
 
 		onCancelPress: function () {
 			var that = this;
@@ -337,14 +428,21 @@ sap.ui.define([
 			oRouter.navTo("Master", false);
 		},
 
-		_PraseError: function (error) {
-			var oBody = error.response.body;
+		// _PraseError: function (error) {
+		// 	var oBody = error.response.body;
+		// 	oBody = JSON.parse(oBody);
+		// 	var sMessage = oBody.error.message.value;
+		// 	return sMessage;
+        // },
+        _praseError: function (aError) {
+			var oBody = aError.responseText;
 			oBody = JSON.parse(oBody);
-			var sMessage = oBody.error.message.value;
+			var sMessage = oBody["error"]["message"]["value"];
 			return sMessage;
-		},
+        },
+        
 
-		_ShowMessageBox: function (sMessage) {
+		_showMessageBox: function (sMessage) {
 				var bCompact = !!this.getView().$().closest(".sapUiSizeCompact").length;
 				MessageBox.error(
 					sMessage, {

@@ -28,13 +28,7 @@
 										<Text text="{/ProductInformation/productID}" class="sapUiSmallMarginTop"/>
 									</form:SimpleForm>
 								</layout:BlockLayoutCell>
-								<layout:BlockLayoutCell class="sapUiTinyMargin sapUiNoContentPadding">
-									<form:SimpleForm labelSpanL="12" labelSpanM="12" labelSpanS="12" emptySpanL="0" emptySpanM="0" emptySpanS="0" maxContainerCols="2"
-										layout="ResponsiveGridLayout" width="100%" class="sapUiTinyMargin">
-										<Label text="{i18n>ZZ_INVISIBLE}" class="Invisble"/>
-										<Text text="{i18n>ZZ_INVISIBLE}" class="Invisble"/>
-									</form:SimpleForm>
-								</layout:BlockLayoutCell>
+								
 								<layout:BlockLayoutCell class="sapUiTinyMargin">
 									<form:SimpleForm labelSpanL="12" labelSpanM="12" labelSpanS="12" emptySpanL="0" emptySpanM="0" emptySpanS="0" maxContainerCols="2"
 										layout="ResponsiveGridLayout" width="100%" class="sapUiTinyMargin">
@@ -53,16 +47,16 @@
 					class="sapUiResponsiveContentPadding">
 					<items>
 						<IconTabFilter icon="sap-icon://hint">
-							<ScrollContainer height="100%" width="100%" horizontal="false" vertical="true" id="ProductFilter"></ScrollContainer>
+							<ScrollContainer height="auto" width="100%" horizontal="false" vertical="true" id="ProductFilter"></ScrollContainer>
 						</IconTabFilter>
 						<IconTabFilter icon="sap-icon://inventory" key="MiantSchFilterKey">
-							<ScrollContainer height="100%" width="100%" horizontal="false" vertical="true" id="MiantSchFilter"></ScrollContainer>
+							<ScrollContainer height="auto" width="100%" horizontal="false" vertical="true" id="MiantSchFilter"></ScrollContainer>
 						</IconTabFilter>
 						<IconTabFilter icon="sap-icon://notes">
-							<ScrollContainer height="100%" width="100%" horizontal="false" vertical="true" id="MiantHisFilter"></ScrollContainer>
+							<ScrollContainer height="auto" width="100%" horizontal="false" vertical="true" id="MiantHisFilter"></ScrollContainer>
 						</IconTabFilter>
 						<IconTabFilter icon="sap-icon://group">
-							<ScrollContainer height="100%" width="100%" horizontal="false" vertical="true" id="CustomerFilter"></ScrollContainer>
+							<ScrollContainer height="auto" width="100%" horizontal="false" vertical="true" id="CustomerFilter"></ScrollContainer>
 						</IconTabFilter>
 					</items>
 					<content></content>

@@ -37,7 +37,7 @@
                 "title": "{{appTitle}}",
                 "info": "{{appTitle}}",
                 "subTitle": "{{appSubTitle}}",
-                "icon": "sap-icon://account"
+                "icon": "sap-icon://upload"
             }
         }
     }
@@ -56,7 +56,11 @@
       "desktop": true,
       "tablet": true,
       "phone": true
-    }
+    },
+    "supportedThemes": [
+        "sap_hcb",
+        "sap_belize"
+    ]
   },
   "sap.ui5": {
     "flexEnabled": false,

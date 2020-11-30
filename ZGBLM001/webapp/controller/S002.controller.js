@@ -20,12 +20,13 @@ sap.ui.define([
 		 * @memberOf showcase.ZSHOWCASE004.view.Master
 		 */
 		onInit: function () {
-			this.oDataManager = new DataManager();
+			// this.oDataManager = new DataManager();
 
 			var oView = this.getView();
 			var oBusyDialog = sap.ui.xmlfragment(oView.getId(), "showcase.ZGBLM001.view.BusyDialog", this);
 			oView.addDependent(oBusyDialog);
-
+            this._busyDialog = new sap.m.BusyDialog();
+            this._busyDialog.open();
             var oModel = new sap.ui.model.json.JSONModel();
             this.getView().setModel(oModel);
             this._getMasterList();
@@ -127,8 +128,8 @@ sap.ui.define([
 
 		_getValueHelpRequest: function () {
 			// var oBusyDialog = this.byId("BusyDialog");
-			var oBusyDialog = new sap.m.BusyDialog();
-			oBusyDialog.open();
+			// var oBusyDialog = new sap.m.BusyDialog();
+			// oBusyDialog.open();
 			var oDialogFilter = this.getView().byId("orderFilter");
 			var aPromises = [];
 
@@ -150,30 +151,276 @@ sap.ui.define([
 			oData.statusHelp = oStatusHelp.statusHelp;
 
 			//get the select list from server
-			var pProductId = this.oDataManager.getProductID();
-			aPromises.push(pProductId);
-			var pCustomerNo = this.oDataManager.getCustomerNo();
-			aPromises.push(pCustomerNo);
-			var pRepairNo = this.oDataManager.getRepairPerson();
-			aPromises.push(pRepairNo);
+			// var pProductId = this.getOwnerComponent().oDataManager.getProductID();
+			// aPromises.push(pProductId);
+			// var pCustomerNo = this.getOwnerComponent().oDataManager.getCustomerNo();
+			// aPromises.push(pCustomerNo);
+			// var pRepairNo = this.getOwnerComponent().oDataManager.getRepairPerson();
+			// aPromises.push(pRepairNo);
 
-			Promise.all(aPromises).then(function (aDataResult) {
-				oData.productNumberHelp = aDataResult[0];
-				oData.customerNoHelp = aDataResult[1];
-				oData.repPersonNoHelp = aDataResult[2];
-				oModel.refresh();
-				oBusyDialog.close();
-				oDialogFilter.open();
-			}, function () {
-				oBusyDialog.close();
-			});
+			// Promise.all(aPromises).then(function (aDataResult) {
+			// 	oData.productNumberHelp = aDataResult[0];
+			// 	oData.customerNoHelp = aDataResult[1];
+			// 	oData.repPersonNoHelp = aDataResult[2];
+			// 	oModel.refresh();
+			// 	oBusyDialog.close();
+			// 	oDialogFilter.open();
+			// }, function () {
+			// 	oBusyDialog.close();
+            // });
+
+            //product number
+            // oValueHelpDate.productNumberHelp = this.oDataManager.getProductInfo();
+            var oProductInfoModel = new sap.ui.model.json.JSONModel();
+            this.getView().setModel(oProductInfoModel, "HelpProductNumber");
+            this._getProductNumber();
+
+			//customer number
+            // oValueHelpDate.customerNoHelp = this.oDataManager.getCustomerInfo();
+            var oCustomerInfoModel = new sap.ui.model.json.JSONModel();
+            this.getView().setModel(oCustomerInfoModel, "HelpCustomerNo");
+			this._getCustomerInfo();
+
+			//repair person number
+            // oValueHelpDate.repPersonNoHelp = this.oDataManager.getRepairInfo();
+            var oRepairPersonModel = new sap.ui.model.json.JSONModel();
+            this.getView().setModel(oRepairPersonModel, "HelpRepair");
+            this._getRepairInfo();
+	        oModel.refresh();
+			oDialogFilter.open();
 		},
 
-		onFilterBarSearch: function () {
-			var oView = this.getView();
-			var oDataRecieved = (this._orderDateRequest.bind(this))();
+        _getProductNumber: function () {
+            //Set Data To Model
+            var oProductInfoModel = this.getView().getModel("HelpProductNumber");
+            var oPromise = this.getOwnerComponent().oDataManager.getProductID()
+            oPromise.then(function(aResults) {
+                oProductInfoModel.setData({
+                    "productNumberHelp" : aResults
+                });
+                this._busyDialog.close();
+            }.bind(this)).catch(function(aError){
+                this._busyDialog.close();
+            }.bind(this));
+        },
 
-			var oModel = new sap.ui.model.json.JSONModel();
+        _getCustomerInfo: function () {
+            //Set Data To Model
+            var oCustomerInfoModel = this.getView().getModel("HelpCustomerNo");
+            var oPromise = this.getOwnerComponent().oDataManager.getCustomerNo()
+            oPromise.then(function(aResults) {
+                oCustomerInfoModel.setData({
+                    "customerNoHelp" : aResults
+                });
+                this._busyDialog.close();
+            }.bind(this)).catch(function(aError){
+                this._busyDialog.close();
+            }.bind(this));
+        },
+        
+        _getRepairInfo: function () {
+            //Set Data To Model
+            var oRepairPersonModel = this.getView().getModel("HelpRepair");
+            var oPromise = this.getOwnerComponent().oDataManager.getRepairPerson()
+            oPromise.then(function(aResults) {
+                oRepairPersonModel.setData({
+                    "repPersonNoHelp" : aResults
+                });
+                this._busyDialog.close();
+            }.bind(this)).catch(function(aError){
+                this._busyDialog.close();
+            }.bind(this));
+        },
+
+		onFilterBarSearch: function () {
+            
+            var oSelf = this;
+            this._orderDateRequest(oSelf);
+
+			// var oDataRecieved = (this._orderDateRequest.bind(this))();
+
+            // var oModel = new sap.ui.model.json.JSONModel();
+            // var oView = this.getView();
+			// oModel.setData(oDataRecieved);
+			// // oView.setModel(oModel, "orderFilter");
+			// var aColumns = [{
+			// 	"label": "Order No.",
+			// 	"template": "orderNo"
+			// }, {
+			// 	"label": "Status",
+			// 	"template": "statusNo"
+			// }, {
+			// 	"label": "Product Number",
+			// 	"template": "productID"
+			// }, {
+			// 	"label": "Customer ID",
+			// 	"template": "customerNo"
+			// }, {
+			// 	"label": "Repair Person ID",
+			// 	"template": "repPersonNo"
+			// }];
+			// var oColData = {};
+			// oColData.cols = aColumns;
+			// var oColModel = new sap.ui.model.json.JSONModel();
+			// oColModel.setData(oColData);
+
+			// var oDialog = oView.byId("orderFilter");
+			// var oTable = oDialog.getTable();
+			// // var oTable = new Table();
+			// oTable.setModel(oModel);
+			// oTable.setModel(oColModel, "columns");
+
+			// if (oTable.bindRows) {
+			// 	oTable.bindAggregation("rows", "/results");
+			// 	// oDialog.setTable(oTable);
+			// }
+
+			// if (oTable.bindItems) {
+			// 	oTable.bindAggregation("items", "/results", function () {
+			// 		return new ColumnListItem({
+			// 			cells: aColumns.map(function (column) {
+			// 				return new Label({
+			// 					text: "{" + column.template + "}"
+			// 				});
+			// 			})
+			// 		});
+			// 	});
+			// 	// oDialog.setTable(oTable);
+			// 	oDialog.update();
+			// }
+
+		},
+
+		onFilterPhoneOK: function () {
+            var oSelf = this;
+			var oDataRecieved = (this._orderDateRequest(oSelf).bind(this))();
+			if (oDataRecieved && oDataRecieved.results.length > 0) {
+				var oModel = this.getView().getModel();
+				var oData = oModel.getData();
+				oData.orderList = oDataRecieved.results;
+				oData.orderCount = oDataRecieved.results.length;
+				oModel.refresh();
+				this.getView().byId("orderFilter").close();
+			}
+
+		},
+
+		_orderDateRequest: function (oSelf) {
+			var oView = this.getView();
+            // var that = this;
+            var oDataFilter = [];
+
+			//get the filter condition from filter fragment
+			if (oView.byId("orderFilter")) {
+				var aStatusSelect = oView.byId("statusSelect").getSelectedKeys();
+				var aProductSelect = oView.byId("productNumberSelect").getSelectedKeys();
+				var aCustomerSelect = oView.byId("customerSelect").getSelectedKeys();
+				var aRepairSelect = oView.byId("repairSelect").getSelectedKeys();
+                
+
+				//status
+				if (aStatusSelect.length > 0) {
+					var aStatusFilter = [];
+					for (var i = 0; i < aStatusSelect.length; i++) {
+						aStatusFilter.push(new sap.ui.model.Filter("statusNo", sap.ui.model.FilterOperator.EQ, aStatusSelect[i]));
+					}
+					var oStatusFilterOr = new sap.ui.model.Filter(aStatusFilter, false);
+				}
+
+				//product
+				if (aProductSelect.length > 0) {
+					var aProductFilter = [];
+					for (i = 0; i < aProductSelect.length; i++) {
+						aProductFilter.push(new sap.ui.model.Filter("productID", sap.ui.model.FilterOperator.EQ, aProductSelect[i]));
+					}
+					var oProductFilterOr = new sap.ui.model.Filter(aProductFilter, false);
+				}
+
+				//customer 
+				if (aCustomerSelect.length > 0) {
+					var aCustomerFilter = [];
+					for (i = 0; i < aCustomerSelect.length; i++) {
+						aCustomerFilter.push(new sap.ui.model.Filter("customerNo", sap.ui.model.FilterOperator.EQ, aCustomerSelect[i]));
+					}
+					var oCustomerFilterOr = new sap.ui.model.Filter(aCustomerFilter, false);
+				}
+
+				//repair person
+				if (aRepairSelect.length > 0) {
+					var aRepairFilter = [];
+					for (i = 0; i < aRepairSelect.length; i++) {
+						aRepairFilter.push(new sap.ui.model.Filter("repPersonNo", sap.ui.model.FilterOperator.EQ, aRepairSelect[i]));
+					}
+					var oRepairFilterOr = new sap.ui.model.Filter(aRepairFilter, false);
+				}
+
+                var aFilter = [];
+                
+				if (oStatusFilterOr) {
+					aFilter.push(new sap.ui.model.Filter(oStatusFilterOr));
+				}
+				if (oProductFilterOr) {
+					aFilter.push(new sap.ui.model.Filter(oProductFilterOr));
+				}
+				if (oCustomerFilterOr) {
+					aFilter.push(new sap.ui.model.Filter(oCustomerFilterOr));
+				}
+				if (oRepairFilterOr) {
+					aFilter.push(new sap.ui.model.Filter(oRepairFilterOr));
+				}
+				if (aFilter.length > 0) {
+				// 	var oDataFilter = [
+				// 		new Filter({
+				// 			filters: aFilter,
+				// 			and: true
+				// 		})
+                //     ];
+                // }
+                 oDataFilter = new sap.ui.model.Filter(aFilter, true);
+				}
+			}
+
+			if (oView.byId("OrderSorting")) {
+				//get the sort condition from sort fragment
+				var sSortKey = "";
+				if (oView.byId("GroupA_No").getSelected()) {
+					sSortKey = "orderNo";
+				}
+				if (oView.byId("GroupA_Status").getSelected()) {
+					sSortKey = "statusNo";
+				}
+				if (oView.byId("GroupA_Date").getSelected()) {
+					sSortKey = "issDate";
+				}
+				if (oView.byId("GroupA_Person").getSelected()) {
+					sSortKey = "repPersonNo";
+				}
+				if (oView.byId("GroupA_Customer").getSelected()) {
+					sSortKey = "customerNo";
+				}
+				// var bSortMethod = "";
+				if (oView.byId("GroupB_ASC").getSelected()) {
+					var bSortMethod = false;
+				} else {
+					bSortMethod = true;
+				}
+				var oSorter = new sap.ui.model.Sorter(sSortKey, bSortMethod);
+			} else {
+				oSorter = new sap.ui.model.Sorter("orderNo", true);
+			}
+            //odata request
+			var pOrderList = this.getOwnerComponent().oDataManager.getFilterOrder(oDataFilter, oSorter);
+			pOrderList.then(function (oDataRecieved) {
+                this._setDataRequest(oDataRecieved);
+			}.bind(this)).catch(function (err) {
+				var sMessage = this._praseError(err);
+				this._showMessageBox(sMessage);
+			}.bind(this));
+        },
+        
+        _setDataRequest: function (oDataRecieved) {
+            var oModel = new sap.ui.model.json.JSONModel();
+            var oView = this.getView();
 			oModel.setData(oDataRecieved);
 			// oView.setModel(oModel, "orderFilter");
 			var aColumns = [{
@@ -221,129 +468,7 @@ sap.ui.define([
 				// oDialog.setTable(oTable);
 				oDialog.update();
 			}
-
-		},
-
-		onFilterPhoneOK: function () {
-			var oDataRecieved = (this._orderDateRequest.bind(this))();
-			if (oDataRecieved && oDataRecieved.results.length > 0) {
-				var oModel = this.getView().getModel();
-				var oData = oModel.getData();
-				oData.orderList = oDataRecieved.results;
-				oData.orderCount = oDataRecieved.results.length;
-				oModel.refresh();
-				this.getView().byId("orderFilter").close();
-			}
-
-		},
-
-		_orderDateRequest: function () {
-			var oView = this.getView();
-			var that = this;
-			//get the filter condition from filter fragment
-			if (oView.byId("orderFilter")) {
-				var aStatusSelect = oView.byId("statusSelect").getSelectedKeys();
-				var aProductSelect = oView.byId("productNumberSelect").getSelectedKeys();
-				var aCustomerSelect = oView.byId("customerSelect").getSelectedKeys();
-				var aRepairSelect = oView.byId("repairSelect").getSelectedKeys();
-
-				//status
-				if (aStatusSelect.length > 0) {
-					var aStatusFilter = [];
-					for (var i = 0; i < aStatusSelect.length; i++) {
-						aStatusFilter.push(new sap.ui.model.Filter("statusNo", sap.ui.model.FilterOperator.EQ, aStatusSelect[i]));
-					}
-					var oStatusFilterOr = new sap.ui.model.Filter(aStatusFilter, false);
-				}
-
-				//product
-				if (aProductSelect.length > 0) {
-					var aProductFilter = [];
-					for (i = 0; i < aProductSelect.length; i++) {
-						aProductFilter.push(new sap.ui.model.Filter("productID", sap.ui.model.FilterOperator.EQ, aProductSelect[i]));
-					}
-					var oProductFilterOr = new sap.ui.model.Filter(aProductFilter, false);
-				}
-
-				//customer 
-				if (aCustomerSelect.length > 0) {
-					var aCustomerFilter = [];
-					for (i = 0; i < aCustomerSelect.length; i++) {
-						aCustomerFilter.push(new sap.ui.model.Filter("customerNo", sap.ui.model.FilterOperator.EQ, aCustomerSelect[i]));
-					}
-					var oCustomerFilterOr = new sap.ui.model.Filter(aCustomerFilter, false);
-				}
-
-				//repair person
-				if (aRepairSelect.length > 0) {
-					var aRepairFilter = [];
-					for (i = 0; i < aRepairSelect.length; i++) {
-						aRepairFilter.push(new sap.ui.model.Filter("repPersonNo", sap.ui.model.FilterOperator.EQ, aRepairSelect[i]));
-					}
-					var oRepairFilterOr = new sap.ui.model.Filter(aRepairFilter, false);
-				}
-
-				var aFilter = [];
-				if (oStatusFilterOr) {
-					aFilter.push(oStatusFilterOr);
-				}
-				if (oProductFilterOr) {
-					aFilter.push(oProductFilterOr);
-				}
-				if (oCustomerFilterOr) {
-					aFilter.push(oCustomerFilterOr);
-				}
-				if (oRepairFilterOr) {
-					aFilter.push(oRepairFilterOr);
-				}
-				if (aFilter.length > 0) {
-					var oDataFilter = [
-						new Filter({
-							filters: aFilter,
-							and: true
-						})
-					];
-				} else {
-					oDataFilter = [];
-				}
-				//filter
-
-			} else {
-				oDataFilter = [];
-			}
-
-			if (oView.byId("OrderSorting")) {
-				//get the sort condition from sort fragment
-				var sSortKey = "";
-				if (oView.byId("GroupA_No").getSelected()) {
-					sSortKey = "orderNo";
-				}
-				if (oView.byId("GroupA_Status").getSelected()) {
-					sSortKey = "statusNo";
-				}
-				if (oView.byId("GroupA_Date").getSelected()) {
-					sSortKey = "issDate";
-				}
-				if (oView.byId("GroupA_Person").getSelected()) {
-					sSortKey = "repPersonNo";
-				}
-				if (oView.byId("GroupA_Customer").getSelected()) {
-					sSortKey = "customerNo";
-				}
-				// var bSortMethod = "";
-				if (oView.byId("GroupB_ASC").getSelected()) {
-					var bSortMethod = false;
-				} else {
-					bSortMethod = true;
-				}
-				var oSorter = new sap.ui.model.Sorter(sSortKey, bSortMethod);
-			} else {
-				oSorter = new sap.ui.model.Sorter("orderNo", true);
-			}
-			//odata request
-			var oDataResult = this.oDataManager.getFilterOrder(oDataFilter, oSorter, that);
-			return oDataResult;
-		},
+        },
 
 		onFilterBarClear: function () {
 			var oView = this.getView();
@@ -451,14 +576,20 @@ sap.ui.define([
 			});
 		},
 
-		_PraseError: function (error) {
-			var oBody = error.response.body;
+		// _PraseError: function (error) {
+		// 	var oBody = error.response.body;
+		// 	oBody = JSON.parse(oBody);
+		// 	var sMessage = oBody.error.message.value;
+		// 	return sMessage;
+        // },
+        _praseError: function (aError) {
+			var oBody = aError.responseText;
 			oBody = JSON.parse(oBody);
-			var sMessage = oBody.error.message.value;
+			var sMessage = oBody["error"]["message"]["value"];
 			return sMessage;
 		},
 
-		_ShowMessageBox: function (sMessage) {
+		_showMessageBox: function (sMessage) {
 			var bCompact = !!this.getView().$().closest(".sapUiSizeCompact").length;
 			MessageBox.error(
 				sMessage, {

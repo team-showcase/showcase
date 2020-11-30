@@ -172,7 +172,7 @@ sap.ui.define([
 				oData.viewsetting.issue = true;
 				oData.viewsetting.repairedContent = true;
 				oData.viewsetting.repairPersonID = true;
-				oData.viewsetting.customerID = true;
+				oDfata.viewsetting.customerID = true;
 			} else {
 				oData.viewsetting.selectCount = "0";
 				oData.viewsetting.selectAll = false;
@@ -285,7 +285,7 @@ sap.ui.define([
             if (sRepairSelect) {
 					sFilter.push(new sap.ui.model.Filter(sRepairSelect));
 			}
-            
+            var sFilterFinal = new sap.ui.model.Filter(sFilter,true);
             // if (sStatusFilter) {
 			// 	sFilter.push(new sap.ui.model.Filter(sStatusFilter));
 			// } else {
@@ -385,7 +385,7 @@ sap.ui.define([
 			var oTableModelShadow = new sap.ui.model.json.JSONModel();
 			var aArrayShadow = [];
             // var oTableDataShadow = {};
-            var sFilterFinal = new sap.ui.model.Filter(sFilter,true);
+            
 			var pOrderList = this.getOwnerComponent().oDataManager.getOrderList(sFilterFinal, sOrderBy);
 			pOrderList.then(function (oDataRecieved) {
 				oTableData.orderList = oDataRecieved.results;
@@ -412,8 +412,8 @@ sap.ui.define([
 					aShadow = aBlank;
 					oShadowMedel.setData(aShadow);
 				}
-				var sMessage = oSelf._PraseError(err);
-				oSelf._ShowMessageBox(sMessage);
+				var sMessage = oSelf._praseError(err);
+				oSelf._showMessageBox(sMessage);
 			}.bind(this));
 		},
 
@@ -544,14 +544,21 @@ sap.ui.define([
 			});
 		},
 
-		_PraseError: function (error) {
-			var oBody = error.response.body;
+		// _PraseError: function (error) {
+		// 	var oBody = error.response.body;
+		// 	oBody = JSON.parse(oBody);
+		// 	var sMessage = oBody.error.message.value;
+		// 	return sMessage;
+        // },
+        _praseError: function (aError) {
+			var oBody = aError.responseText;
 			oBody = JSON.parse(oBody);
-			var sMessage = oBody.error.message.value;
+			var sMessage = oBody["error"]["message"]["value"];
 			return sMessage;
-		},
+        },
+        
 
-		_ShowMessageBox: function (sMessage) {
+		_showMessageBox: function (sMessage) {
 			var bCompact = !!this.getView().$().closest(".sapUiSizeCompact").length;
 			MessageBox.error(
 				sMessage, {

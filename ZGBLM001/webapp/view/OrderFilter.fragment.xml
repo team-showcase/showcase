@@ -14,24 +14,24 @@
 					<fb:FilterGroupItem groupName="Group1" name="Product Number" label="{i18n>ZZ_PRODUCTNO}" visibleInFilterBar="true">
 						<fb:control>
 							<m:MultiComboBox id="productNumberSelect" selectionChange="handleProductNumberChange" selectionFinish="handleProductNumberFinish"
-								items="{ path: '/productNumberHelp',sorter: { path: 'productID'}}">
-								<core:Item key="{productID}" text="{productID}"/>
+								items="{ path: 'HelpProductNumber>/productNumberHelp',sorter: { path: 'productID'}}">
+								<core:Item key="{HelpProductNumber>productID}" text="{HelpProductNumber>productID}"/>
 							</m:MultiComboBox>
 						</fb:control>
 					</fb:FilterGroupItem>
 					<fb:FilterGroupItem groupName="Group1" name="Customer ID" label="{i18n>ZZ_CUSTOMERID}" visibleInFilterBar="true">
 						<fb:control>
 							<m:MultiComboBox id="customerSelect" selectionChange="handleCustomerChange" selectionFinish="handleCustomerFinish"
-								items="{ path: '/customerNoHelp',sorter: { path: 'customerNo'}}">
-								<core:Item key="{customerNo}" text="{customerNo}"/>
+								items="{ path: 'HelpCustomerNo>/customerNoHelp',sorter: { path: 'customerNo'}}">
+								<core:Item key="{HelpCustomerNo>customerNo}" text="{HelpCustomerNo>customerNo}"/>
 							</m:MultiComboBox>
 						</fb:control>
 					</fb:FilterGroupItem>
 					<fb:FilterGroupItem groupName="Group1" name="Repair Person ID" label="{i18n>ZZ_REPAIR_PERSON}" visibleInFilterBar="true">
 						<fb:control>
 							<m:MultiComboBox id="repairSelect" selectionChange="handleRepairChange" selectionFinish="handleRepairFinish"
-								items="{ path: '/repPersonNoHelp',sorter: { path: 'repPersonNo'}}">
-								<core:Item key="{repPersonNo}" text="{repPersonNo}"/>
+								items="{ path: 'HelpRepair>/repPersonNoHelp',sorter: { path: 'repPersonNo'}}">
+								<core:Item key="{HelpRepair>repPersonNo}" text="{HelpRepair>repPersonNo}"/>
 							</m:MultiComboBox>
 						</fb:control>
 					</fb:FilterGroupItem>

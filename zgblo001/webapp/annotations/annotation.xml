@@ -1,0 +1,447 @@
+<edmx:Edmx xmlns:edmx="http://docs.oasis-open.org/odata/ns/edmx" Version="4.0">
+    <edmx:Reference Uri="/sap/opu/odata/IWFND/CATALOGSERVICE;v=2/Vocabularies(TechnicalName='%2FIWBEP%2FVOC_COMMON',Version='0001',SAP__Origin='LOCAL')/$value">
+        <edmx:Include Namespace="com.sap.vocabularies.Common.v1" Alias="Common"/>
+    </edmx:Reference>
+    <edmx:Reference Uri="/sap/opu/odata/IWFND/CATALOGSERVICE;v=2/Vocabularies(TechnicalName='%2FIWBEP%2FVOC_UI',Version='0001',SAP__Origin='LOCAL')/$value">
+        <edmx:Include Namespace="com.sap.vocabularies.UI.v1" Alias="UI"/>
+    </edmx:Reference>
+    <edmx:Reference Uri="/sap/opu/odata/IWFND/CATALOGSERVICE;v=2/Vocabularies(TechnicalName='%2FIWBEP%2FVOC_COMMUNICATION',Version='0001',SAP__Origin='LOCAL')/$value">
+        <edmx:Include Namespace="com.sap.vocabularies.Communication.v1" Alias="Communication"/>
+    </edmx:Reference>
+    <edmx:Reference Uri="sap/opu/odata/sap/ZGBLMTORDER_SRV/$metadata">
+        <edmx:Include Namespace="ZGBLMTORDER_SRV"/>
+    </edmx:Reference>
+    <edmx:DataServices>
+        <Schema xmlns="http://docs.oasis-open.org/odata/ns/edm" Namespace="local">
+        <Annotations Target="ZGBLMTORDER_SRV.ENTITY001">
+				<Annotation Term="UI.LineItem" Qualifier="order_list">
+					<!--Configuring list item-->
+					<Collection>
+						<Record Type="UI.DataField">
+							<PropertyValue Property="Value" Path="orderNo"/>
+							<PropertyValue Property="Label" String="{@i18n&gt;maintenance_order}"/>
+						</Record>
+						<Record Type="UI.DataField">
+							<PropertyValue Property="Value" Path="statusNo"/>
+							<PropertyValue Property="Label" String="{@i18n&gt;status}"/>
+						</Record>
+					</Collection>
+				</Annotation>
+                <Annotation Term="UI.Identification" Qualifier="order_navigation">
+					<!--Configure navigation to Order Display application-->
+					<Collection>
+						<Record Type="UI.DataFieldForIntentBasedNavigation">
+							<PropertyValue Property="SemanticObject" String="Order"/>
+							<PropertyValue Property="Action" String="Display"/>
+							<PropertyValue Property="RequiresContext" Bool="true"/>
+							<PropertyValue Property="Inline" Bool="true"/>
+							<PropertyValue Property="Label" String="{@i18n&gt;maintenance_order}"/>
+						</Record>
+						<Record Type="UI.DataField">
+							<PropertyValue Property="Value" Path="orderNo"/>
+						</Record>
+					</Collection>
+				</Annotation>
+                <Annotation Term="UI.SelectionVariant" Qualifier="new">
+					<!--Configure filter for new order-->
+					<Record Type="UI.SelectionVariantType">
+						<PropertyValue Property="SelectOptions">
+							<Collection>
+								<Record Type="UI.SelectOptionType">
+									<PropertyValue Property="PropertyName" PropertyPath="statusNo"/>
+									<PropertyValue Property="Ranges">
+										<Collection>
+											<Record Type="UI.SelectionRangeType">
+												<PropertyValue Property="Sign" EnumMember="UI.SelectionRangeSignType/I"/>
+												<PropertyValue Property="Option" EnumMember="UI.SelectionRangeOptionType/EQ"/>
+												<PropertyValue Property="Low" String="NEW"/>
+											</Record>
+										</Collection>
+									</PropertyValue>
+								</Record>
+							</Collection>
+						</PropertyValue>
+					</Record>
+				</Annotation>
+                <Annotation Term="UI.SelectionVariant" Qualifier="repaired">
+					<!--Configure filter for repaired order-->
+					<Record Type="UI.SelectionVariantType">
+						<PropertyValue Property="SelectOptions">
+							<Collection>
+								<Record Type="UI.SelectOptionType">
+									<PropertyValue Property="PropertyName" PropertyPath="statusNo"/>
+									<PropertyValue Property="Ranges">
+										<Collection>
+											<Record Type="UI.SelectionRangeType">
+												<PropertyValue Property="Sign" EnumMember="UI.SelectionRangeSignType/I"/>
+												<PropertyValue Property="Option" EnumMember="UI.SelectionRangeOptionType/EQ"/>
+												<PropertyValue Property="Low" String="REPAIRED"/>
+											</Record>
+										</Collection>
+									</PropertyValue>
+								</Record>
+							</Collection>
+						</PropertyValue>
+					</Record>
+				</Annotation>
+                <Annotation Term="UI.SelectionVariant" Qualifier="closed">
+					<!--Configure filter for closed order-->
+					<Record Type="UI.SelectionVariantType">
+						<PropertyValue Property="SelectOptions">
+							<Collection>
+								<Record Type="UI.SelectOptionType">
+									<PropertyValue Property="PropertyName" PropertyPath="statusNo"/>
+									<PropertyValue Property="Ranges">
+										<Collection>
+											<Record Type="UI.SelectionRangeType">
+												<PropertyValue Property="Sign" EnumMember="UI.SelectionRangeSignType/I"/>
+												<PropertyValue Property="Option" EnumMember="UI.SelectionRangeOptionType/EQ"/>
+												<PropertyValue Property="Low" String="CLOSED"/>
+											</Record>
+										</Collection>
+									</PropertyValue>
+								</Record>
+							</Collection>
+						</PropertyValue>
+					</Record>
+				</Annotation>
+                <Annotation Term="UI.SelectionVariant" Qualifier="deleted">
+					<!--Configure filter for deleted order-->
+					<Record Type="UI.SelectionVariantType">
+						<PropertyValue Property="SelectOptions">
+							<Collection>
+								<Record Type="UI.SelectOptionType">
+									<PropertyValue Property="PropertyName" PropertyPath="statusNo"/>
+									<PropertyValue Property="Ranges">
+										<Collection>
+											<Record Type="UI.SelectionRangeType">
+												<PropertyValue Property="Sign" EnumMember="UI.SelectionRangeSignType/I"/>
+												<PropertyValue Property="Option" EnumMember="UI.SelectionRangeOptionType/EQ"/>
+												<PropertyValue Property="Low" String="DELETED"/>
+											</Record>
+										</Collection>
+									</PropertyValue>
+								</Record>
+							</Collection>
+						</PropertyValue>
+					</Record>
+				</Annotation>
+                <Annotation Term="UI.HeaderInfo">
+					<!--Configure header information in quick view card for unprocessed order-->
+					<Record Type="UI.HeaderInfoType">
+						<PropertyValue Property="TypeName" String="{@i18n&gt;unprocessed_order}"/>
+						<PropertyValue Property="TypeNamePlural" String="{@i18n&gt;unprocessed_order}"/>
+						<PropertyValue Property="Title">
+							<Record Type="UI.DataField">
+								<PropertyValue Property="Value" Path="orderNo"/>
+							</Record>
+						</PropertyValue>
+					</Record>
+				</Annotation>
+                <Annotation Term="UI.Facets" Qualifier="unprocessed_order">
+					<!--Configure facet in quick view card for unprocessed order -->
+					<Collection>
+						<Record Type="UI.ReferenceFacet">
+							<Annotation Term="UI.IsSummary"/>
+							<PropertyValue Property="Label" String="{@i18n&gt;unprocessed_order}"/>
+							<PropertyValue Property="ID" Path="orderNo"/>
+							<PropertyValue Property="Target" AnnotationPath="@UI.FieldGroup#unprocessed_order"/>
+						</Record>
+					</Collection>
+				</Annotation>
+                <Annotation Term="UI.FieldGroup" Qualifier="unprocessed_order">
+					<!--Configure detial item quick view card for unprocessed order-->
+					<Record Type="UI.FieldGroupType">
+						<PropertyValue Property="Data">
+							<Collection>
+								<Record Type="UI.DataField">
+									<PropertyValue Property="Value" Path="orderNo"/>
+									<PropertyValue Property="Label" String="{@i18n&gt;maintenance_order}"/>
+								</Record>
+								<Record Type="UI.DataField">
+									<PropertyValue Property="Value" Path="productID"/>
+									<PropertyValue Property="Label" String="{@i18n&gt;product_number}"/>
+								</Record>
+								<Record Type="UI.DataField">
+									<PropertyValue Property="Value" Path="customerNo"/>
+									<PropertyValue Property="Label" String="{@i18n&gt;customer_id}"/>
+								</Record>
+								<Record Type="UI.DataField">
+									<PropertyValue Property="Value" Path="repPersonNo"/>
+									<PropertyValue Property="Label" String="{@i18n&gt;repair_person_no}"/>
+								</Record>
+								<Record Type="UI.DataField">
+									<PropertyValue Property="Value" Path="statusNo"/>
+									<PropertyValue Property="Label" String="{@i18n&gt;status}"/>
+								</Record>
+							</Collection>
+						</PropertyValue>
+					</Record>
+				</Annotation>
+            </Annotations>
+            <Annotations Target="ZGBLMTORDER_SRV.ENTITY002">
+				<Annotation Term="UI.LineItem" Qualifier="product">
+					<!--Configure detail item for product -->
+					<Collection>
+						<Record Type="UI.DataFieldWithUrl">
+							<PropertyValue Property="Url" Path="productInfo"/>
+							<PropertyValue Property="Value" Path="imageURL"/>
+						</Record>
+						<Record Type="UI.DataField">
+							<PropertyValue Property="Value" Path="productID"/>
+						</Record>
+						<Record Type="UI.DataField">
+							<PropertyValue Property="Value" Path="productName"/>
+						</Record>
+					</Collection>
+				</Annotation>
+			</Annotations>
+            <Annotations Target="ZGBLMTORDER_SRV.ENTITY008">
+				<Annotation Term="UI.LineItem" Qualifier="feedback_average_repPerson">
+					<!--Configure detail item for feedback average of evrry repair person-->
+					<Collection>
+						<Record Type="UI.DataField">
+							<PropertyValue Property="Value" Path="repPersonNo"/>
+						</Record>
+						<Record Type="UI.DataField">
+							<PropertyValue Property="Value" Path="name"/>
+						</Record>
+						<Record Type="UI.DataFieldForAnnotation">
+							<PropertyValue Property="Target" AnnotationPath="@UI.DataPoint#feedback_average_repPerson"/>
+						</Record>
+					</Collection>
+				</Annotation>
+				<Annotation Term="UI.DataPoint" Qualifier="feedback_average_repPerson">
+					<!--Configure datapoint for feedback average of evrry repair person -->
+					<Record Type="UI.DataPointType">
+						<PropertyValue Property="CriticalityCalculation">
+							<Record Type="UI.CriticalityCalculationType">
+								<PropertyValue Property="ImprovementDirection" EnumMember="UI.ImprovementDirectionType/Maximize"/>
+								<PropertyValue Property="ToleranceRangeLowValue" Decimal="4"/>
+								<PropertyValue Property="DeviationRangeLowValue" Decimal="3"/>
+							</Record>
+						</PropertyValue>
+						<PropertyValue Property="Visualization" EnumMember="UI.VisualizationType/Number"/>
+						<PropertyValue Property="Value" Path="feedBack"/>
+						<PropertyValue Property="ValueFormat">
+							<Record Type="UI.NumberFormat">
+								<PropertyValue Property="NumberOfFractionalDigits" Int="1"/>
+							</Record>
+						</PropertyValue>
+					</Record>
+				</Annotation>
+			</Annotations>
+			<Annotations Target="ZGBLMTORDER_SRV.ENTITY009">
+				<!--Configure line data for feedback count -->
+				<Annotation Term="UI.DataPoint" Qualifier="feedback_average_all">
+					<!--Configure datapoint for feedback average -->
+					<Record Type="UI.DataPointType">
+						<PropertyValue Property="Title" String="Average"/>
+						<PropertyValue Property="Value" Path="average"/>
+						<PropertyValue Property="CriticalityCalculation">
+							<Record Type="com.sap.vocabularies.UI.v1.CriticalityCalculationType">
+								<PropertyValue Property="ImprovementDirection" EnumMember="UI.ImprovementDirectionType/Target"/>
+								<PropertyValue Property="ToleranceRangeLowValue" String="4"/>
+								<PropertyValue Property="DeviationRangeLowValue" String="3"/>
+							</Record>
+						</PropertyValue>
+						<PropertyValue Property="ValueFormat">
+							<Record Type="com.sap.vocabularies.UI.v1.NumberFormat">
+								<PropertyValue Property="NumberOfFractionalDigits" Int="1"/>
+							</Record>
+						</PropertyValue>
+						<PropertyValue Property="TrendCalculation">
+							<Record Type="UI.TrendCalculationType">
+								<PropertyValue Property="ReferenceValue" String="4"/>
+								<PropertyValue Property="UpDifference" Decimal="4"/>
+								<PropertyValue Property="StrongUpDifference" Decimal="5"/>
+								<PropertyValue Property="DownDifference" Decimal="2"/>
+								<PropertyValue Property="StrongDownDifference" Decimal="1"/>
+							</Record>
+						</PropertyValue>
+					</Record>
+				</Annotation>
+				<Annotation Term="UI.Chart" Qualifier="feedback_count_degree">
+					<!--Configure chart data for all feedback-->
+					<Record Type="UI.ChartDefinitionType">
+						<PropertyValue Property="ChartType" EnumMember="UI.ChartType/Donut"/>
+						<PropertyValue Property="MeasureAttributes">
+							<Collection>
+								<Record Type="UI.ChartMeasureAttributeType">
+									<PropertyValue Property="Measure" PropertyPath="count"/>
+									<PropertyValue Property="DataPoint" AnnotationPath="@UI.DataPoint#line"/>
+								</Record>
+							</Collection>
+						</PropertyValue>
+						<PropertyValue Property="DimensionAttributes">
+							<Collection>
+								<Record Type="UI.ChartDimensionAttributeType">
+									<PropertyValue Property="Dimension" PropertyPath="fdbacktxt"/>
+								</Record>
+							</Collection>
+						</PropertyValue>
+					</Record>
+				</Annotation>
+				<Annotation Term="UI.DataPoint" Qualifier="line">
+					<Record Type="UI.DataPointType">
+						<PropertyValue Property="Value" Path="count"/>
+					</Record>
+				</Annotation>
+			</Annotations>
+			<Annotations Target="ZGBLMTORDER_SRV.ENTITY010">
+				<Annotation Term="UI.Chart" Qualifier="order_count_month">
+					<!--Configure chart data for order count by status-->
+					<Record Type="UI.ChartDefinitionType">
+						<PropertyValue Property="ChartType" EnumMember="UI.ChartType/ColumnStacked"/>
+						<PropertyValue Property="MeasureAttributes">
+							<Collection>
+								<Record Type="UI.ChartMeasureAttributeType">
+									<PropertyValue Property="Measure" PropertyPath="countNew"/>
+									<PropertyValue Property="Role" EnumMember="UI.ChartMeasureRoleType/Axis1"/>
+								</Record>
+								<Record Type="UI.ChartMeasureAttributeType">
+									<PropertyValue Property="Measure" PropertyPath="countRepaired"/>
+									<PropertyValue Property="Role" EnumMember="UI.ChartMeasureRoleType/Axis1"/>
+								</Record>
+								<Record Type="UI.ChartMeasureAttributeType">
+									<PropertyValue Property="Measure" PropertyPath="countClosed"/>
+									<PropertyValue Property="Role" EnumMember="UI.ChartMeasureRoleType/Axis1"/>
+								</Record>
+								<Record Type="UI.ChartMeasureAttributeType">
+									<PropertyValue Property="Measure" PropertyPath="countDeleted"/>
+									<PropertyValue Property="Role" EnumMember="UI.ChartMeasureRoleType/Axis1"/>
+								</Record>
+							</Collection>
+						</PropertyValue>
+						<PropertyValue Property="DimensionAttributes">
+							<Collection>
+								<Record Type="UI.ChartDimensionAttributeType">
+									<PropertyValue Property="Dimension" PropertyPath="month"/>
+									<PropertyValue Property="Role" EnumMember="UI.ChartDimensionRoleType/Category"/>
+								</Record>
+							</Collection>
+						</PropertyValue>
+					</Record>
+				</Annotation>
+				<Annotation Term="UI.DataPoint" Qualifier="order_count_all">
+					<!--Configure datapoint for total order count -->
+					<Record Type="UI.DataPointType">
+						<PropertyValue Property="Value" Path="countAll"/>
+					</Record>
+				</Annotation>
+				<Annotation Term="UI.DataPoint" Qualifier="order_count_all_new">
+					<!--Configure datapoint for total new order count -->
+					<Record Type="UI.DataPointType">
+						<PropertyValue Property="Value" Path="countNew"/>
+					</Record>
+				</Annotation>
+				<Annotation Term="UI.DataPoint" Qualifier="order_count_all_repaired">
+					<!--Configure datapoint for total repaired order count -->
+					<Record Type="UI.DataPointType">
+						<PropertyValue Property="Value" Path="countRepaired"/>
+					</Record>
+				</Annotation>
+				<Annotation Term="UI.DataPoint" Qualifier="order_count_all_closed">
+					<!--Configure datapoint for total closed count -->
+					<Record Type="UI.DataPointType">
+						<PropertyValue Property="Value" Path="countClosed"/>
+					</Record>
+				</Annotation>
+				<Annotation Term="UI.DataPoint" Qualifier="order_count_all_deleted">
+					<!--Configure datapoint for total deleted order count -->
+					<Record Type="UI.DataPointType">
+						<PropertyValue Property="Value" Path="countDeleted"/>
+					</Record>
+				</Annotation>
+				<Annotation Term="UI.Chart" Qualifier="order_count_month_new">
+					<!--Configure chart data for new order count -->
+					<Record Type="UI.ChartDefinitionType">
+						<PropertyValue Property="ChartType" EnumMember="UI.ChartType/Column"/>
+						<PropertyValue Property="MeasureAttributes">
+							<Collection>
+								<Record Type="UI.ChartMeasureAttributeType">
+									<PropertyValue Property="Measure" PropertyPath="countNew"/>
+									<PropertyValue Property="Role" EnumMember="UI.ChartMeasureRoleType/Axis1"/>
+								</Record>
+							</Collection>
+						</PropertyValue>
+						<PropertyValue Property="DimensionAttributes">
+							<Collection>
+								<Record Type="UI.ChartDimensionAttributeType">
+									<PropertyValue Property="Dimension" PropertyPath="month"/>
+									<PropertyValue Property="Role" EnumMember="UI.ChartDimensionRoleType/Category"/>
+								</Record>
+							</Collection>
+						</PropertyValue>
+					</Record>
+				</Annotation>
+				<Annotation Term="UI.Chart" Qualifier="order_count_month_repaired">
+					<!--Configure chart data for repaired order count -->
+					<Record Type="UI.ChartDefinitionType">
+						<PropertyValue Property="ChartType" EnumMember="UI.ChartType/Column"/>
+						<PropertyValue Property="MeasureAttributes">
+							<Collection>
+								<Record Type="UI.ChartMeasureAttributeType">
+									<PropertyValue Property="Measure" PropertyPath="countRepaired"/>
+									<PropertyValue Property="Role" EnumMember="UI.ChartMeasureRoleType/Axis1"/>
+								</Record>
+							</Collection>
+						</PropertyValue>
+						<PropertyValue Property="DimensionAttributes">
+							<Collection>
+								<Record Type="UI.ChartDimensionAttributeType">
+									<PropertyValue Property="Dimension" PropertyPath="month"/>
+									<PropertyValue Property="Role" EnumMember="UI.ChartDimensionRoleType/Category"/>
+								</Record>
+							</Collection>
+						</PropertyValue>
+					</Record>
+				</Annotation>
+				<Annotation Term="UI.Chart" Qualifier="order_count_month_closed">
+					<!--Configure chart data for closed order count -->
+					<Record Type="UI.ChartDefinitionType">
+						<PropertyValue Property="ChartType" EnumMember="UI.ChartType/Column"/>
+						<PropertyValue Property="MeasureAttributes">
+							<Collection>
+								<Record Type="UI.ChartMeasureAttributeType">
+									<PropertyValue Property="Measure" PropertyPath="countClosed"/>
+									<PropertyValue Property="Role" EnumMember="UI.ChartMeasureRoleType/Axis1"/>
+								</Record>
+							</Collection>
+						</PropertyValue>
+						<PropertyValue Property="DimensionAttributes">
+							<Collection>
+								<Record Type="UI.ChartDimensionAttributeType">
+									<PropertyValue Property="Dimension" PropertyPath="month"/>
+									<PropertyValue Property="Role" EnumMember="UI.ChartDimensionRoleType/Category"/>
+								</Record>
+							</Collection>
+						</PropertyValue>
+					</Record>
+				</Annotation>
+				<Annotation Term="UI.Chart" Qualifier="order_count_month_deleted">
+					<!--Configure chart data for deleted order count -->
+					<Record Type="UI.ChartDefinitionType">
+						<PropertyValue Property="ChartType" EnumMember="UI.ChartType/Column"/>
+						<PropertyValue Property="MeasureAttributes">
+							<Collection>
+								<Record Type="UI.ChartMeasureAttributeType">
+									<PropertyValue Property="Measure" PropertyPath="countDeleted"/>
+									<PropertyValue Property="Role" EnumMember="UI.ChartMeasureRoleType/Axis1"/>
+								</Record>
+							</Collection>
+						</PropertyValue>
+						<PropertyValue Property="DimensionAttributes">
+							<Collection>
+								<Record Type="UI.ChartDimensionAttributeType">
+									<PropertyValue Property="Dimension" PropertyPath="month"/>
+									<PropertyValue Property="Role" EnumMember="UI.ChartDimensionRoleType/Category"/>
+								</Record>
+							</Collection>
+						</PropertyValue>
+					</Record>
+				</Annotation>
+			</Annotations>
+        </Schema>
+    </edmx:DataServices>
+</edmx:Edmx>

@@ -18,10 +18,10 @@ sap.ui.define([
 		 * @memberOf showcase.ZSHOWCASE004.view.Detail
 		 */
 		onInit: function () {
-			this.oDataManager = new DataManager();
+			// this.oDataManager = new DataManager();
 
 			var oDeviceModel = this.getOwnerComponent().getModel("device");
-			var oDeviceData = oDeviceModel.getData();
+            var oDeviceData = oDeviceModel.getData();
 			if (oDeviceData.isPhone === true) {
 				var sProduct = "showcase.ZGBLM001.view.ProductInfoPhone";
 				var sMiantSch = "showcase.ZGBLM001.view.MaintenanceSchPhone";
@@ -64,7 +64,14 @@ sap.ui.define([
 		},
 
 		_onLoad: function (sParameter, that) {
-			var oScreenControl = {
+			
+
+			// var oDataModel = new sap.ui.model.odata.ODataModel("/sap/opu/odata/sap/ZSHOWCASE_SRV/", true);
+			// var sFilterSt = "ENTITY001Set(orderNo='" + sParameter + "')?$expand=ENTITY002,ENTITY003,ENTITY004,ENTITY005";
+
+			var pDetailOrder = this.getOwnerComponent().oDataManager.getDetailOrder(sParameter);
+			pDetailOrder.then(function (oDataRecieved) {
+                var oScreenControl = {
 				displayModeVis: true,
 				editModeVis: false,
 				footerVis: false,
@@ -73,23 +80,19 @@ sap.ui.define([
 				closeVis: false,
 				saveVis: false,
 				cancelVis: false
-			};
-			var oStatusData = {
-				dateTimeFrom: "Error",
-				dateTimeTo: "Error",
-				repairPerson: "Error",
-				price: "Error",
-				currency: "Error",
-				repairContent: "Error"
-			};
-			var oModel = new sap.ui.model.json.JSONModel();
-			var oData = {};
-
-			var oDataModel = new sap.ui.model.odata.ODataModel("/sap/opu/odata/sap/ZSHOWCASE_SRV/", true);
-			var sFilterSt = "ENTITY001Set(orderNo='" + sParameter + "')?$expand=ENTITY002,ENTITY003,ENTITY004,ENTITY005";
-
-			var pDetailOrder = this.oDataManager.getDetailOrder(sFilterSt);
-			pDetailOrder.then(function (oDataRecieved) {
+                };
+                var oStatusData = {
+                    dateTimeFrom: "Error",
+                    dateTimeTo: "Error",
+                    repairPerson: "Error",
+                    price: "Error",
+                    currency: "Error",
+                    repairContent: "Error"
+                };
+                var oModel = new sap.ui.model.json.JSONModel();
+                var oData = {};
+                // var oModel = this.getView().getModel();
+                // var oData = oModel.getData();
 				oData.MaintenanceOrder = oDataRecieved;
 				oData.orderBackup = {};
 				oData.ProductInformation = oDataRecieved.ENTITY002;
@@ -144,11 +147,12 @@ sap.ui.define([
 				}
 				oData.statusCtrl = oStatusData;
 				oModel.setData(oData);
-				that.getView().setModel(oModel);
-			}).catch(function (err) {
+                that.getView().setModel(oModel);
+                // oModel.refresh();
+			}.bind(this)).catch(function (err) {
 				var oRouter = sap.ui.core.UIComponent.getRouterFor(that);
 				oRouter.navTo("NotFound");
-			});
+			}.bind(this));
 		},
 
 		_dateEdit: function (oDate, bToserver) {
@@ -197,8 +201,10 @@ sap.ui.define([
 			oData.ScreenControl.cancelVis = true;
 			this.getView().byId("RepairInput").setValue(oData.RepairedPersonInfo.repPersonNo);
 
-			oModel.refresh();
-			this._getRepairPerson();
+            oModel.refresh();
+            var oRepairPersonModel = new sap.ui.model.json.JSONModel();
+            this.getView().setModel(oRepairPersonModel, "HelpRepair");
+            this._getRepairPerson();
 			this.onDateFromChange();
 			this.onDateToChange();
 			this._initRepairCheck();
@@ -211,13 +217,27 @@ sap.ui.define([
 		},
 
 		_getRepairPerson: function () {
-			var aRepairResult = this.oDataManager.getDetailRepair();
-			var oRepairInfoModel = new sap.ui.model.json.JSONModel();
-			var oRepairInfoData = {};
-			oRepairInfoData.RepairInfo = aRepairResult;
-			oRepairInfoModel.setData(oRepairInfoData);
-			this.getView().setModel(oRepairInfoModel, "HelpRepair");
-		},
+		// 	var aRepairResult = this.getOwnerComponent().oDataManager.getDetailRepair();
+		// 	var oRepairInfoModel = new sap.ui.model.json.JSONModel();
+		// 	var oRepairInfoData = {};
+		// 	oRepairInfoData.RepairInfo = aRepairResult;
+		// 	oRepairInfoModel.setData(oRepairInfoData);
+		// 	this.getView().setModel(oRepairInfoModel, "HelpRepair");
+        // },
+            this._busyDialog = new sap.m.BusyDialog();
+            this._busyDialog.open();
+            //Set Data To Model
+            var oRepairPersonModel = this.getView().getModel("HelpRepair");
+            var oPromise = this.getOwnerComponent().oDataManager.getDetailRepair()
+            oPromise.then(function(aResults) {
+                oRepairPersonModel.setData({
+                    "RepairInfo" : aResults
+                });
+                this._busyDialog.close();
+            }.bind(this)).catch(function(aError){
+                this._busyDialog.close();
+            }.bind(this));
+        },
 
 		RepairValueHelp: function (oEvent) {
 			var sInputValue = oEvent.getSource().getValue();
@@ -378,10 +398,11 @@ sap.ui.define([
 		onAcceptPress: function () {
 			var sMessage = this._editErrorMessage.bind(this)();
 			if (sMessage) {
-				this._ShowMessageBox(sMessage);
+				this._showMessageBox(sMessage);
 			} else {
 				var oUpdateOrder = this._orderUpdateEdit.bind(this)();
-				var oError = this._orderUpdateExecute.bind(this, oUpdateOrder)();
+                // var oError = this._orderUpdateExecute.bind(this, oUpdateOrder)();
+                this._orderUpdateExecute(oUpdateOrder);
 			}
 		},
 
@@ -437,8 +458,24 @@ sap.ui.define([
 			var that = this;
 			var oUpdateOrder = oUpdateData;
 			var sOptions = "/ENTITY001Set(orderNo='" + oUpdateOrder.orderNo + "')";
-			this.oDataManager.updateOrder(sOptions, oUpdateOrder, that);                         
-		},
+            // this.oDataManager.updateOrder(sOptions, oUpdateOrder, that);
+            this._updateOrder(sOptions, oUpdateOrder, that);
+        },
+        
+        _updateOrder: function (sOptions, oUpdateOrder, that) {
+            //update Data from Model
+            var oPromise = this.getOwnerComponent().oDataManager.updateOrder(sOptions, oUpdateOrder)
+            oPromise.then(function() {
+                this._onLoad(oUpdateOrder.orderNo, that);
+				this._MasterRefresh();
+                this._busyDialog.close();
+            }.bind(this)).catch(function(aError){
+                var sMessage = this._praseError(aError);
+                this._showMessageBox(sMessage);
+                this._busyDialog.close();
+            }.bind(this));
+        },
+
 
 		_editErrorMessage: function () {
 			var sMessage = "";
@@ -589,29 +626,64 @@ sap.ui.define([
 
 		_MasterRefresh: function () {
 			var oView = sap.ui.getCore().byId(this.MasterId);
-			var oModel = oView.getModel();
-			var oData = oModel.getData();
-			var oDataModel = new sap.ui.model.odata.ODataModel("/sap/opu/odata/sap/ZSHOWCASE_SRV/", true);
-			var aOrderList = this.oDataManager.getMasterList();
-			oData.orderList = aOrderList;
-			oData.orderCount = aOrderList.length;
-			oModel.refresh();
+			
+			// var oData = oModel.getData();
+			// var oDataModel = new sap.ui.model.odata.ODataModel("/sap/opu/odata/sap/ZSHOWCASE_SRV/", true);
+            // var aOrderList = this.oDataManager.getMasterList();
+            this._refreshMasterList(oView);
 
-			var aSorters = [];
+			// oData.orderList = aOrderList;
+			// oData.orderCount = aOrderList.length;
+			// oModel.refresh();
+
+			// var aSorters = [];
+			// var oList = oView.byId("orderMasterlist");
+			// var oBinding = oList.getBinding("items");
+			// aSorters.push(new sap.ui.model.Sorter("orderNo", true));
+			// oBinding.sort(aSorters);
+        },
+        
+        _refreshMasterList: function (oView) {
+            //Set Data To Model
+            var oPromise = this.getOwnerComponent().oDataManager.getMasterList()
+            oPromise.then(function(aResults) {
+                this._setMasterList(aResults, oView);
+                this._busyDialog.close();
+            }.bind(this)).catch(function(aError){
+                this._busyDialog.close();
+            }.bind(this));
+        },
+
+        _setMasterList: function (aResults, oView) {
+           
+            var oModel = oView.getModel();
+            var oData = oModel.getData();
+            if (aResults) {
+				oData.orderList = aResults;
+				oData.orderCount = aResults.length;
+			}
+            oModel.refresh();
+            var aSorters = [];
 			var oList = oView.byId("orderMasterlist");
 			var oBinding = oList.getBinding("items");
 			aSorters.push(new sap.ui.model.Sorter("orderNo", true));
-			oBinding.sort(aSorters);
-		},
+            oBinding.sort(aSorters);
+        },
 
-		_PraseError: function (error) {
-			var oBody = error.response.body;
+		// _PraseError: function (error) {
+		// 	var oBody = error.response.body;
+		// 	oBody = JSON.parse(oBody);
+		// 	var sMessage = oBody.error.message.value;
+		// 	return sMessage;
+        // },
+        _praseError: function (aError) {
+			var oBody = aError.responseText;
 			oBody = JSON.parse(oBody);
-			var sMessage = oBody.error.message.value;
+			var sMessage = oBody["error"]["message"]["value"];
 			return sMessage;
 		},
 
-		_ShowMessageBox: function (sMessage) {
+		_showMessageBox: function (sMessage) {
 			var bCompact = !!this.getView().$().closest(".sapUiSizeCompact").length;
 			MessageBox.error(
 				sMessage, {

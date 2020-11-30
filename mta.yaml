@@ -14,6 +14,8 @@ modules:
   parameters:
     disk-quota: 256M
     memory: 256M
+    routes:
+    - route: https://Showcase-${org}-${space}.${default-domain}
 - name: Showcase_ui_deployer
   type: com.sap.application.content
   path: .
@@ -45,8 +47,8 @@ modules:
       name: ZGBLD001
       target-path: resources/
     - artifacts:
-      - overivew.zip
-      name: overivew
+      - zgblo001.zip
+      name: zgblo001
       target-path: resources/
 - name: ZGBLD002
   type: html5
@@ -92,9 +94,19 @@ modules:
     commands:
     - npm run build
     supported-platforms: []
-- name: flp_showcase
+- name: zgblo001
+  type: html5
+  path: zgblo001
+  build-parameters:
+    build-result: dist
+    builder: custom
+    commands:
+    - npm install
+    - npm run build:cf
+    supported-platforms: []
+- name: flp_showase
   type: com.sap.portal.content
-  path: flp_showcase
+  path: flp_showase
   requires:
   - name: portal_resources_Showcase
   - name: Showcase_html_repo_host
@@ -104,16 +116,6 @@ modules:
     buildpack: https://github.com/cloudfoundry/nodejs-buildpack/releases/download/v1.6.51/nodejs-buildpack-cflinuxfs3-v1.6.51.zip
     memory: 128M
     stack: cflinuxfs3
-- name: overivew
-  type: html5
-  path: overivew
-  build-parameters:
-    build-result: dist
-    builder: custom
-    commands:
-    - npm install
-    - npm run build:cf
-    supported-platforms: []
 resources:
 - name: Showcase_html_repo_runtime
   type: org.cloudfoundry.managed-service

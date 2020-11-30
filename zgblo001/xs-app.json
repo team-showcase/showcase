@@ -1,0 +1,19 @@
+{
+  "welcomeFile": "/test/flpSandbox.html",
+  "authenticationMethod": "route",
+  "routes": [
+    {
+      "source": "^/sap/(.*)$",
+      "target": "/sap/$1",
+      "destination": "S4J",
+      "authenticationType": "xsuaa",
+      "csrfProtection": false
+    },
+    {
+      "source": "^(.*)$",
+      "target": "$1",
+      "service": "html5-apps-repo-rt",
+      "authenticationType": "none"
+    }
+  ]
+}
