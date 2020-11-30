@@ -172,7 +172,7 @@ sap.ui.define([
 				oData.viewsetting.issue = true;
 				oData.viewsetting.repairedContent = true;
 				oData.viewsetting.repairPersonID = true;
-				oData.viewsetting.customerID = true;
+				oDfata.viewsetting.customerID = true;
 			} else {
 				oData.viewsetting.selectCount = "0";
 				oData.viewsetting.selectAll = false;

@@ -1,5 +1,5 @@
 {
-  "welcomeFile": "/manifest.json",
+  "welcomeFile": "/test/flpSandbox.html",
   "authenticationMethod": "route",
   "routes": [
     {

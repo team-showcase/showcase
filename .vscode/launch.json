@@ -1,8 +1,8 @@
 {
   "configurations": [
     {
-      "name": "overview",
-      "cwd": "${workspaceFolder}/ZGBLO001/overview",
+      "name": "zgblo001",
+      "cwd": "${workspaceFolder}/zgblo001",
       "runtimeArgs": [
         "run-script",
         "start"
@@ -21,7 +21,7 @@
       "console": "integratedTerminal",
       "internalConsoleOptions": "neverOpen",
       "env": {
-        "run.config": "{\"handlerId\":\"fiori_tools\",\"runnableId\":\"/home/user/projects/Showcase/ZGBLO001/overview\"}"
+        "run.config": "{\"handlerId\":\"fiori_tools\",\"runnableId\":\"/home/user/projects/Showcase/zgblo001\"}"
       }
     }
   ],

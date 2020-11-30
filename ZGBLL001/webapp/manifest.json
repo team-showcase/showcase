@@ -37,8 +37,7 @@
                 "title": "{{appTitle}}",
                 "info": "{{appTitle}}",
                 "subTitle": "{{appSubTitle}}",
-                "icon": "sap-icon://list",
-                "indicatorDataSource": "sap/opu/odata/sap/ZSHOWCASE_SRV/ENTITY007Set('Maintenance Order List')"
+                "icon": "sap-icon://list"
             }
         }
     }
@@ -99,6 +98,13 @@
           "refreshAfterChange": false
         }
       }
+    },
+    "resources": {
+      "css": [
+        {
+          "uri": "css/style.css"
+        }
+      ]
     },
     "routing": {
 			"config": {

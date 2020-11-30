@@ -19,6 +19,7 @@ sap.ui.define([
 				"use strict";
 				// this.oModel = new sap.ui.model.odata.ODataModel("sap/opu/odata/sap/ZGBLMTORDER_SRV/", true);
                 this.oDataModel = aComponent.getModel("ZGBLMTORDER_SRV");
+                this.oDataModel.setUseBatch(false);
             },
 
 			// getProductInfo: function () {

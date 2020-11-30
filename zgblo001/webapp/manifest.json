@@ -132,7 +132,7 @@
                     "staticContent": [
                         {
                             "title": "{{create_new}}",
-                            "imageUri": "sap-icon://Fiori5/F0670",
+                            "imageUri": "sap-icon://add-document",
                             "semanticObject": "New",
                             "action": "Create"
                         },
@@ -311,23 +311,23 @@
                     "staticContent": [
                         {
                             "title": "Xu Gang",
-                            "imageUri": "img/XuGang.png"
+                            "imageUri": "images/XuGang.png"
                         },
                         {
                             "title": "Sun Weinan",
-                            "imageUri": "img/SunWeinan.jpg"
+                            "imageUri": "images/SunWeinan.jpg"
                         },
                         {
                             "title": "Lu Yao",
-                            "imageUri": "img/LuYao.jpg"
+                            "imageUri": "images/LuYao.jpg"
                         },
                         {
                             "title": "Wang Na",
-                            "imageUri": "img/WangNa.jpg"
+                            "imageUri": "images/WangNa.jpg"
                         },
                         {
                             "title": "Mao Ge",
-                            "imageUri": "img/MaoGe.jpg"
+                            "imageUri": "images/MaoGe.jpg"
                         }
                     ],
                     "defaultSpan": {

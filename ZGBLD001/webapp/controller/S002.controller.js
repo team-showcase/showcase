@@ -363,6 +363,7 @@ sap.ui.define([
             //update Data from Model
             var oPromise = this.getOwnerComponent().oDataManager.updateOrder(oTempData)
             oPromise.then(function() {
+                MessageToast.show("create the order");
                 this._naviToOrderDisplay();
                 this._busyDialog.close();
             }.bind(this)).catch(function(aError){

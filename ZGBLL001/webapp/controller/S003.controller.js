@@ -373,7 +373,7 @@ sap.ui.define([
 							oSelf.byId("dateTimeFrom").setValue("");
 							oSelf.byId("dateTimeTo").setValue("");
 							var oModel = oSelf.getView().getModel();
-							var oBackUpData = oSelf._getMaintenaceOrder(oSelf, oMaintOrderData.MaintenanceOrder.orderNo);
+							var oBackUpData = oSelf._editMianInfo(oSelf, oMaintOrderData.MaintenanceOrder.orderNo);
 							oModel.setData(oBackUpData);
 							oModel.refresh();
 						}
@@ -405,9 +405,9 @@ sap.ui.define([
 		},
 
 		_CloeseOrderConfirm: function (oSelf, sFeedBackRate) {
-			MessageToast.show("delete the order");
+			// MessageToast.show("close the order");
 			var oMaintOrderData = oSelf.getView().getModel().getData();
-			var oDataModel = new sap.ui.model.odata.ODataModel("/sap/opu/odata/sap/ZSHOWCASE_SRV/", true);
+			// var oDataModel = new sap.ui.model.odata.ODataModel("/sap/opu/odata/sap/ZSHOWCASE_SRV/", true);
 			var oTempData = {};
 			oTempData.orderNo = oMaintOrderData.MaintenanceOrder.orderNo;
 			oTempData.statusNo = oMaintOrderData.MaintenanceOrder.statusNo;

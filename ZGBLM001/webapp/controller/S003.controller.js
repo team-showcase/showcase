@@ -64,7 +64,14 @@ sap.ui.define([
 		},
 
 		_onLoad: function (sParameter, that) {
-			var oScreenControl = {
+			
+
+			// var oDataModel = new sap.ui.model.odata.ODataModel("/sap/opu/odata/sap/ZSHOWCASE_SRV/", true);
+			// var sFilterSt = "ENTITY001Set(orderNo='" + sParameter + "')?$expand=ENTITY002,ENTITY003,ENTITY004,ENTITY005";
+
+			var pDetailOrder = this.getOwnerComponent().oDataManager.getDetailOrder(sParameter);
+			pDetailOrder.then(function (oDataRecieved) {
+                var oScreenControl = {
 				displayModeVis: true,
 				editModeVis: false,
 				footerVis: false,
@@ -73,23 +80,19 @@ sap.ui.define([
 				closeVis: false,
 				saveVis: false,
 				cancelVis: false
-			};
-			var oStatusData = {
-				dateTimeFrom: "Error",
-				dateTimeTo: "Error",
-				repairPerson: "Error",
-				price: "Error",
-				currency: "Error",
-				repairContent: "Error"
-			};
-			var oModel = new sap.ui.model.json.JSONModel();
-			var oData = {};
-
-			// var oDataModel = new sap.ui.model.odata.ODataModel("/sap/opu/odata/sap/ZSHOWCASE_SRV/", true);
-			// var sFilterSt = "ENTITY001Set(orderNo='" + sParameter + "')?$expand=ENTITY002,ENTITY003,ENTITY004,ENTITY005";
-
-			var pDetailOrder = this.getOwnerComponent().oDataManager.getDetailOrder(sParameter);
-			pDetailOrder.then(function (oDataRecieved) {
+                };
+                var oStatusData = {
+                    dateTimeFrom: "Error",
+                    dateTimeTo: "Error",
+                    repairPerson: "Error",
+                    price: "Error",
+                    currency: "Error",
+                    repairContent: "Error"
+                };
+                var oModel = new sap.ui.model.json.JSONModel();
+                var oData = {};
+                // var oModel = this.getView().getModel();
+                // var oData = oModel.getData();
 				oData.MaintenanceOrder = oDataRecieved;
 				oData.orderBackup = {};
 				oData.ProductInformation = oDataRecieved.ENTITY002;
@@ -144,7 +147,8 @@ sap.ui.define([
 				}
 				oData.statusCtrl = oStatusData;
 				oModel.setData(oData);
-				that.getView().setModel(oModel);
+                that.getView().setModel(oModel);
+                // oModel.refresh();
 			}.bind(this)).catch(function (err) {
 				var oRouter = sap.ui.core.UIComponent.getRouterFor(that);
 				oRouter.navTo("NotFound");
