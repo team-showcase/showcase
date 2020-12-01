@@ -77,11 +77,7 @@ sap.ui.define([
             return oPromise;
             },
 
-<<<<<<< HEAD
-            
-=======
 			
->>>>>>> yanlili
             getRepairPerson: function () {
                 //repair person number
                 var oPromise = new Promise(function(fResolve,fReject){
@@ -158,20 +154,7 @@ sap.ui.define([
             },
 
 
-			// updateOrder: function (sOptions, oUpdateOrder, that) {
-			// 	this.oModel.update(sOptions, oUpdateOrder, {
-			// 		context: null,
-			// 		async: false,
-			// 		success: function (oData, responce) {
-			// 			that._onLoad(oUpdateOrder.orderNo, that);
-			// 			that._MasterRefresh();
-			// 		},
-			// 		error: function (err) {
-			// 			var sMessage = that._PraseError(err);
-			// 			that._ShowMessageBox(sMessage);
-			// 		}
-			// 	});
-			// },
+			
 
             updateOrder: function (sOptions, oUpdateOrder) {
                 //Update ENTITY001Set Data
@@ -188,20 +171,7 @@ sap.ui.define([
                 return oPromise;
             },
 
-			// getCreateProduct: function () {
-			// 	var sFilterSt = "ENTITY002Set";
-			// 	var aProductResult = [];
-			// 	this.oModel.read(sFilterSt, {
-			// 		context: null,
-			// 		urlParameters: null,
-			// 		async: false,
-			// 		success: function (oDataRecieved, responce) {
-			// 			aProductResult = oDataRecieved.results;
-			// 		},
-			// 		error: function (err) {}
-			// 	});
-			// 	return aProductResult;
-			// },
+		
 
             getCreateProduct: function () {
                 //Get ENTITY002Set Data
@@ -217,21 +187,6 @@ sap.ui.define([
                 }.bind(this));
             return oPromise;
             },
-
-			// getCreateCustomer: function () {
-			// 	var sFilterSt = "ENTITY003Set";
-			// 	var aCustomerResult = [];
-			// 	this.oModel.read(sFilterSt, {
-			// 		context: null,
-			// 		urlParameters: null,
-			// 		async: false,
-			// 		success: function (oDataRecieved, responce) {
-			// 			aCustomerResult = oDataRecieved.results;
-			// 		},
-			// 		error: function (err) {}
-			// 	});
-			// 	return aCustomerResult;
-			// },
 
             getCreateCustomer: function () {
                 //Get ENTITY003Set Data
