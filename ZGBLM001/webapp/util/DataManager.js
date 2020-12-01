@@ -137,20 +137,6 @@ sap.ui.define([
             return oPromise;
             },
 
-			// getDetailRepair: function () {
-			// 	var sFilterSt = "ENTITY004Set";
-			// 	var aRepairResult = [];
-			// 	this.oModel.read(sFilterSt, {
-			// 		context: null,
-			// 		urlParameters: null,
-			// 		async: false,
-			// 		success: function (oDataRecieved, responce) {
-			// 			aRepairResult = oDataRecieved.results;
-			// 		},
-			// 		error: function (err) {}
-			// 	});
-			// 	return aRepairResult;
-            // },
             
             getDetailRepair: function () {
                 //Get ENTITY004Set Data
