@@ -40,26 +40,7 @@ sap.ui.define([
             },
             
 
-			// getProductID: function () {
-			// 	//product number
-			// 	var oDataModel = this.oModel;
-			// 	var sFilterSt = "/ENTITY002Set?$select=productID";
-			// 	var pProductId = new Promise(function (resolve, reject) {
-			// 		oDataModel.read(sFilterSt, {
-			// 			context: null,
-			// 			urlParameters: null,
-			// 			async: false,
-			// 			success: function (oDataRecieved, responce) {
-			// 				resolve(oDataRecieved.results);
-			// 			},
-			// 			error: function (err) {
-			// 				reject();
-			// 			}
-			// 		});
-			// 	});
-			// 	return pProductId;
-            // },
-            
+			           
             getProductID: function () {
                 //product number
                 var oPromise = new Promise(function(fResolve,fReject){
