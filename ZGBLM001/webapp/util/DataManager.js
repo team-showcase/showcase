@@ -101,25 +101,6 @@ sap.ui.define([
             },
 
 
-			// getFilterOrder: function (oDataFilter, oSorter, that) {
-			// 	var sRequst = "/ENTITY001Set";
-			// 	var oDataResult = {};
-			// 	this.oModel.read(sRequst, {
-			// 		context: null,
-			// 		urlParameters: null,
-			// 		filters: oDataFilter,
-			// 		sorters: oSorter,
-			// 		async: false,
-			// 		success: function (oDataRecieved, responce) {
-			// 			oDataResult = oDataRecieved;
-			// 		},
-			// 		error: function (err) {
-			// 			var sMessage = that._PraseError(err);
-			// 			that._ShowMessageBox(sMessage);
-			// 		}
-			// 	});
-			// 	return oDataResult;
-            // },
             
             getFilterOrder: function (oDataFilter, oSorter) {
 				var pOrderList = new Promise(function (resolve, reject) {
