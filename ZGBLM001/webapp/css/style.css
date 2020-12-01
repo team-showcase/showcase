@@ -54,7 +54,9 @@
 .TextBold {
     font-weight: bold !important;
 }
-
+.objectStreamNoBackground {
+    z-index: 0 !important;
+}
 
 /*.sapMTitle {*/
 

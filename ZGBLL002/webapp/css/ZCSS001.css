@@ -1,3 +1,6 @@
 .sapUiTable>.sapUiTableTbr.sapUiTableMTbr {
     height: 3rem
 }
+.objectStreamNoBackground {
+    z-index: 0 !important;
+}

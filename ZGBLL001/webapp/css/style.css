@@ -27,3 +27,7 @@ text-align: center !important;
 /*.sapMTitle {*/
 /*    margin-top: 0.8rem !important;*/
 /*}*/
+
+.objectStreamNoBackground {
+    z-index: 0 !important;
+}
