@@ -188,21 +188,6 @@ sap.ui.define([
             return oPromise;
             },
 
-			// getCreateCustomer: function () {
-			// 	var sFilterSt = "ENTITY003Set";
-			// 	var aCustomerResult = [];
-			// 	this.oModel.read(sFilterSt, {
-			// 		context: null,
-			// 		urlParameters: null,
-			// 		async: false,
-			// 		success: function (oDataRecieved, responce) {
-			// 			aCustomerResult = oDataRecieved.results;
-			// 		},
-			// 		error: function (err) {}
-			// 	});
-			// 	return aCustomerResult;
-			// },
-
             getCreateCustomer: function () {
                 //Get ENTITY003Set Data
                 var oPromise = new Promise(function(fResolve,fReject){
