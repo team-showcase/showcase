@@ -77,25 +77,6 @@ sap.ui.define([
             return oPromise;
             },
 
-			// getRepairPerson: function () {
-			// 	//repair person number
-			// 	var oDataModel = this.oModel;
-			// 	var sFilterSt = "/ENTITY004Set?$select=repPersonNo";
-			// 	var pRepairNo = new Promise(function (resolve, reject) {
-			// 		oDataModel.read(sFilterSt, {
-			// 			context: null,
-			// 			urlParameters: null,
-			// 			async: false,
-			// 			success: function (oDataRecieved, responce) {
-			// 				resolve(oDataRecieved.results);
-			// 			},
-			// 			error: function (err) {
-			// 				reject();
-			// 			}
-			// 		});
-			// 	});
-			// 	return pRepairNo;
-            // },
             
             getRepairPerson: function () {
                 //repair person number
