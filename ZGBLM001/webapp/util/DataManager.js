@@ -77,7 +77,11 @@ sap.ui.define([
             return oPromise;
             },
 
+<<<<<<< HEAD
             
+=======
+			
+>>>>>>> yanlili
             getRepairPerson: function () {
                 //repair person number
                 var oPromise = new Promise(function(fResolve,fReject){
