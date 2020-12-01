@@ -117,23 +117,7 @@ sap.ui.define([
 				return pOrderList;
 			},
 
-			// getDetailOrder: function (sFilterSt) {
-			// 	var oDataModel = this.oModel;
-			// 	var pDetailOrder = new Promise(function (resolve, reject) {
-			// 		oDataModel.read(sFilterSt, {
-			// 			context: null,
-			// 			urlParameters: null,
-			// 			async: false,
-			// 			success: function (oDataRecieved, responce) {
-			// 				resolve(oDataRecieved);
-			// 			},
-			// 			error: function (err) {
-			// 				reject();
-			// 			}
-			// 		});
-			// 	});
-			// 	return pDetailOrder;
-            // },
+			
             
             getDetailOrder: function (sParameter) {
 				var sFilterSt = "/ENTITY001Set(orderNo='" + sParameter + "')";
