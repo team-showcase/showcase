@@ -262,23 +262,7 @@ sap.ui.define([
             return oPromise;
             },
 
-			// createOrder: function (oTempData) {
-			// 	var oDataModel = this.oModel;
-			// 	var pCreateOrder = new Promise(function (resolve, reject) {
-			// 		oDataModel.create("/ENTITY001Set", oTempData, {
-			// 			context: null,
-			// 			async: false,
-			// 			success: function (oData, responce) {
-			// 				resolve();
-			// 			},
-			// 			error: function (err) {
-			// 				reject(err);
-			// 			}
-			// 		});
-			// 	});
-			// 	return pCreateOrder;
-			// }
-
+		
             createOrder: function (aTempData) {
                 //Update ENTITY001Set Data
                  var oPromise = new Promise(function(fResolve,fReject){
