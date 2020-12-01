@@ -418,11 +418,7 @@ sap.ui.define([
 		},
 
 		_filterEdit: function (aFilterArray, sFilterKey) {
-			// function filterKeyJiont(sValue) {
-            //     // var sFileterKey = sFilterKey + " eq '" + sValue + "' or ";
-            //     var sFileterKey = sFilterKey + " , sap.ui.model.FilterOperator.EQ, '" + sValue + "'";
-			// 	return sFileterKey;
-			// }
+			
 			if (aFilterArray.length === 0) {
 				var sBlank = "";
 				return sBlank;
@@ -433,11 +429,6 @@ sap.ui.define([
                 }
                 var sFilterFinal=new sap.ui.model.Filter(sFilterTemp,false);
                 return sFilterFinal;
-				// var aFilterJiont = aFilterArray.map(filterKeyJiont);
-				// var sFilterDummy = aFilterJiont.toString();
-				// var sFilter = sFilterDummy.substring(0, sFilterDummy.length - 4);
-				// var sFilterFinal = sFilter.replace(/(,)/g, "");
-				// return sFilterFinal;
 			}
 		},
 
