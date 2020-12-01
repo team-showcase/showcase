@@ -20,22 +20,6 @@ sap.ui.define([
                 this.oDataModel.setUseBatch(false);
             },
 
-			// getMasterList: function () {
-			// 	var aOrderList = [];
-			// 	var sFilterSt = "/ENTITY001Set?$expand=ENTITY002";
-			// 	// call the odata request
-			// 	this.oModel.read(sFilterSt, {
-			// 		context: null,
-			// 		urlParameters: null,
-			// 		async: false,
-			// 		// filters: aFilters,
-			// 		success: function (oDataRecieved, responce) {
-			// 			aOrderList = oDataRecieved.results;
-			// 		},
-			// 		error: function (err) {}
-			// 	});
-			// 	return aOrderList;
-            // },
             
             getMasterList: function () {
 				// var oDataModel = this.oModel;
