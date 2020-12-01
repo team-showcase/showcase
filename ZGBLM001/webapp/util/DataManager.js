@@ -58,26 +58,6 @@ sap.ui.define([
                 }.bind(this));
             return oPromise;
             },
-
-			// getCustomerNo: function () {
-			// 	//customer number
-			// 	var oDataModel = this.oModel;
-			// 	var sFilterSt = "/ENTITY003Set?$select=customerNo";
-			// 	var pCustomerNo = new Promise(function (resolve, reject) {
-			// 		oDataModel.read(sFilterSt, {
-			// 			context: null,
-			// 			urlParameters: null,
-			// 			async: false,
-			// 			success: function (oDataRecieved, responce) {
-			// 				resolve(oDataRecieved.results);
-			// 			},
-			// 			error: function (err) {
-			// 				reject();
-			// 			}
-			// 		});
-			// 	});
-			// 	return pCustomerNo;
-            // },
             
             getCustomerNo: function () {
                 //customer number
